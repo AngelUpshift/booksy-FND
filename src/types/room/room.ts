@@ -14,6 +14,7 @@ export interface IImage {
 }
 
 export interface IRoom {
+  _id: string;
   name: string;
   description: string;
   images: IImage[];

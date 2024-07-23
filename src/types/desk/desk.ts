@@ -7,6 +7,7 @@ export enum deskStatus {
 export type deskDirection = "h" | "v";
 
 export interface IDesk {
+  _id: string;
   name: string;
   shortName: string;
   description: string;

@@ -1,3 +1,3 @@
 export interface IBookingGetBookingByIdParams {
-  id: string;
+  _id: string;
 }

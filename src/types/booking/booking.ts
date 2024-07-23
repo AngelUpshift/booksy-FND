@@ -10,6 +10,7 @@ export enum bookingStatus {
 export type durationType = 1 | 3 | 5 | 10;
 
 export interface IBooking {
+  _id: string;
   status: bookingStatus;
   date: Date;
   user: IUser;
