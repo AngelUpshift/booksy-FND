@@ -1,11 +1,11 @@
 import { IDesk } from "../desk/desk";
-import { IImage } from "./room";
+import { IImage, roomType } from "./room";
 
 export interface IRoomPutRoom {
-  id: string; /// params
-  name: string;
-  description: string;
-  images: IImage[];
-  desks: IDesk[];
-  type: number;
+  _id: string; /// params
+  name?: string;
+  description?: string;
+  images?: IImage[];
+  desks?: IDesk[];
+  type?: roomType;
 }

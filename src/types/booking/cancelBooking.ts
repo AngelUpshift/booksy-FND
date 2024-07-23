@@ -1,3 +1,3 @@
 export interface IBookingCancelBookingParams {
-  id: string;
+  _id: string;
 }
