@@ -1,11 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { IUser, team, userRole } from "../../../types/user/user";
 import { IUserPutUser } from "../../../types/user/putUser";
-import { IUserGetUserQuery } from "../../../types/user/getUser";
+import {
+  IUserGetUserQuery,
+  IUserPaginationMetadata,
+} from "../../../types/user/getUser";
+import axios from "axios";
+
 interface IUserState {
   currentUser: IUser;
   userList: IUser[];
   queryParameters: IUserGetUserQuery;
+  paginationMetadata: IUserPaginationMetadata;
 }
 
 const initialState: IUserState = {
@@ -22,23 +28,65 @@ const initialState: IUserState = {
   },
   userList: [],
   queryParameters: {},
+  paginationMetadata: {
+    totalUsers: 0,
+    totalPages: 0,
+    currentPage: 1,
+  },
 };
+
+export const getUserThunk = createAsyncThunk(
+  "user/getAll",
+  async (queryParams: IUserGetUserQuery, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/v1/user/", { params: queryParams });
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
+
+export const putUserThunk = createAsyncThunk(
+  "user/update",
+  async (userData: IUserPutUser, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`/v1/user/${userData._id}`, userData);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    getUser: (state, action: PayloadAction<IUserGetUserQuery>) => {
-      state.queryParameters = action.payload;
-    },
-    putUser: (state, action: PayloadAction<IUserPutUser>) => {
-      state.currentUser = {
-        ...state.currentUser,
-        ...action.payload,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getUserThunk.fulfilled, (state, action) => {
+      state.userList = action.payload.users;
+      state.paginationMetadata = {
+        totalUsers: action.payload.totalUsers,
+        totalPages: action.payload.totalPages,
+        currentPage: action.payload.currentPage,
       };
-    },
+    });
+    builder.addCase(putUserThunk.fulfilled, (state, action) => {
+      state.currentUser = { ...state.currentUser, ...action.payload };
+      state.userList = state.userList.map((user) =>
+        user._id === action.payload._id ? { ...user, ...action.payload } : user
+      );
+    });
   },
 });
 
-export const { getUser, putUser } = userSlice.actions;
 export default userSlice.reducer;

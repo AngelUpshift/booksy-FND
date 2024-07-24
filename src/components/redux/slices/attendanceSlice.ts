@@ -104,3 +104,5 @@ export const attendanceSlice = createSlice({
     });
   },
 });
+
+export default attendanceSlice.reducer;

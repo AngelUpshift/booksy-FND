@@ -4,3 +4,9 @@ export interface IRoomGetRoomQuery {
   page?: number;
   order?: "asc" | "desc";
 }
+
+export interface IRoomPaginationMetadata {
+  totalRooms: number;
+  totalPages: number;
+  currentPage: number;
+}

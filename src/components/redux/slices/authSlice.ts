@@ -71,7 +71,7 @@ export const meThunk = createAsyncThunk(
   "auth/me",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/v1/auth/me");
+      const response = await axios.get("/v1/auth/me");
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -128,7 +128,7 @@ export const resetPasswordThunk = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.post(
+      const response = await axios.patch(
         `/v1/auth/reset-password/${token}`,
         passwordData
       );
@@ -196,3 +196,5 @@ export const authSlice = createSlice({
     });
   },
 });
+
+export default authSlice.reducer;
