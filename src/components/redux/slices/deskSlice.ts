@@ -8,7 +8,6 @@ import { IDeskPostDesk } from "../../../types/desk/postDesk";
 import { IDeskPutDesk } from "../../../types/desk/putDesk";
 import { IDeskGetDeskByIdParams } from "../../../types/desk/getDeskById";
 import axios from "axios";
-import { act } from "react";
 
 export interface deskState {
   currentDesk: IDesk;
