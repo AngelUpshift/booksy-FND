@@ -1,14 +1,20 @@
 import { IDesk } from "../../../types/desk/desk";
-import { IRoomGetRoomQuery } from "../../../types/room/getRoom";
+import {
+  IRoomGetRoomQuery,
+  IRoomPaginationMetadata,
+} from "../../../types/room/getRoom";
+import { IRoomGetRoomByIdParams } from "../../../types/room/getRoomById";
 import { IRoomPostRoom } from "../../../types/room/postRoom";
 import { IRoomPutRoom } from "../../../types/room/putRoom";
 import { IImage, IRoom, roomStatus, roomType } from "../../../types/room/room";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export interface roomState {
   currentRoom: IRoom;
   roomList: IRoom[];
   queryParameters: IRoomGetRoomQuery;
+  paginationMetadata: IRoomPaginationMetadata;
 }
 
 export const initialState: roomState = {
@@ -23,33 +29,104 @@ export const initialState: roomState = {
   },
   roomList: [],
   queryParameters: {},
+  paginationMetadata: {
+    totalRooms: 0,
+    totalPages: 0,
+    currentPage: 1,
+  },
 };
+
+export const putRoomThunk = createAsyncThunk(
+  "room/update",
+  async (roomData: IRoomPutRoom, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`/v1/room/${roomData._id}`, roomData);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
+
+export const postRoomThunk = createAsyncThunk(
+  "room/create",
+  async (roomData: IRoomPostRoom, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/v1/room/", roomData);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
+
+export const getRoomThunk = createAsyncThunk(
+  "room/getAll",
+  async (queryParams: IRoomGetRoomQuery, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/v1/room/", { params: queryParams });
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
+
+export const getRoomByIdThunk = createAsyncThunk(
+  "room/getById",
+  async (roomData: IRoomGetRoomByIdParams, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/v1/room/${roomData._id}`);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
 
 export const roomSlice = createSlice({
   name: "room",
   initialState,
-  reducers: {
-    postRoom: (state, action: PayloadAction<IRoomPostRoom>) => {
-      state.currentRoom.name = action.payload.name;
-      state.currentRoom.description = action.payload.description;
-      state.currentRoom.images = action.payload.images;
-      state.currentRoom.desks = action.payload.desks;
-      state.currentRoom.type = action.payload.type;
-    },
-    putRoom: (state, action: PayloadAction<IRoomPutRoom>) => {
-      state.currentRoom = {
-        ...state.currentRoom,
-        ...action.payload,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getRoomThunk.fulfilled, (state, action) => {
+      state.roomList = action.payload.rooms;
+      state.paginationMetadata = {
+        totalRooms: action.payload.totalRooms,
+        totalPages: action.payload.totalPages,
+        currentPage: action.payload.currentPage,
       };
-    },
-    getRoom: (state, action: PayloadAction<IRoomGetRoomQuery>) => {
-      state.queryParameters = action.payload;
-    },
-    getRoomById: (state, action: PayloadAction<IRoom>) => {
+    });
+    builder.addCase(getRoomByIdThunk.fulfilled, (state, action) => {
       state.currentRoom = action.payload;
-    },
+    });
+    builder.addCase(postRoomThunk.fulfilled, (state, action) => {
+      state.currentRoom = action.payload;
+      state.roomList = [...state.roomList, action.payload];
+    });
+    builder.addCase(putRoomThunk.fulfilled, (state, action) => {
+      state.currentRoom = { ...state.currentRoom, ...action.payload };
+      state.roomList = state.roomList.map((room) =>
+        room._id === action.payload._id ? { ...room, ...action.payload } : room
+      );
+    });
   },
 });
 
-export const { postRoom, putRoom, getRoom, getRoomById } = roomSlice.actions;
 export default roomSlice.reducer;

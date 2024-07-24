@@ -1,13 +1,20 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { deskDirection, deskStatus, IDesk } from "../../../types/desk/desk";
-import { IDeskGetDeskQuery } from "../../../types/desk/getDesk";
+import {
+  IDeskGetDeskQuery,
+  IDeskPaginationMetadata,
+} from "../../../types/desk/getDesk";
 import { IDeskPostDesk } from "../../../types/desk/postDesk";
 import { IDeskPutDesk } from "../../../types/desk/putDesk";
+import { IDeskGetDeskByIdParams } from "../../../types/desk/getDeskById";
+import axios from "axios";
+import { act } from "react";
 
 export interface deskState {
   currentDesk: IDesk;
   deskList: IDesk[];
   queryParameters: IDeskGetDeskQuery;
+  paginationMetadata: IDeskPaginationMetadata;
 }
 
 export const initialState: deskState = {
@@ -21,29 +28,104 @@ export const initialState: deskState = {
   },
   deskList: [],
   queryParameters: {},
+  paginationMetadata: {
+    totalDesks: 0,
+    totalPages: 0,
+    currentPage: 1,
+  },
 };
+
+export const getDeskByIdThunk = createAsyncThunk(
+  "desk/getById",
+  async (deskData: IDeskGetDeskByIdParams, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/v1/desk/${deskData._id}`);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
+
+export const getDeskThunk = createAsyncThunk(
+  "desk/getAll",
+  async (queryParams: IDeskGetDeskQuery, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/v1/desk/", { params: queryParams });
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
+
+export const postDeskThunk = createAsyncThunk(
+  "desk/create",
+  async (deskData: IDeskPostDesk, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/v1/desk/", deskData);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
+
+export const putDeskThunk = createAsyncThunk(
+  "desk/update",
+  async (deskData: IDeskPutDesk, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`/v1/desk/${deskData._id}`, deskData);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An unexpedted error occurred");
+      }
+    }
+  }
+);
 
 export const deskSlice = createSlice({
   name: "desk",
   initialState,
-  reducers: {
-    postDesk: (state, action: PayloadAction<IDeskPostDesk>) => {
-      state.currentDesk.name = action.payload.name;
-      state.currentDesk.shortName = action.payload.shortName;
-      state.currentDesk.description = action.payload.description;
-      state.currentDesk.direction = action.payload.direction;
-    },
-    putDesk: (state, action: PayloadAction<IDeskPutDesk>) => {
-      state.currentDesk = {
-        ...state.currentDesk,
-        ...action.payload,
-      };
-    },
-    getDesk: (state, action: PayloadAction<IDeskGetDeskQuery>) => {
-      state.queryParameters = action.payload;
-    },
-    getDeskById: (state, action: PayloadAction<IDesk>) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getDeskByIdThunk.fulfilled, (state, action) => {
       state.currentDesk = action.payload;
-    },
+    });
+    builder.addCase(getDeskThunk.fulfilled, (state, action) => {
+      state.deskList = action.payload.desks;
+      state.paginationMetadata = {
+        totalDesks: action.payload.totalDesks,
+        totalPages: action.payload.totalPages,
+        currentPage: action.payload.currentPage,
+      };
+    });
+    builder.addCase(postDeskThunk.fulfilled, (state, action) => {
+      state.currentDesk = action.payload;
+      state.deskList = [...state.deskList, action.payload];
+    });
+    builder.addCase(putDeskThunk.fulfilled, (state, action) => {
+      state.currentDesk = { ...state.currentDesk, ...action.payload };
+      state.deskList = state.deskList.map((desk) =>
+        desk._id === action.payload._id ? { ...desk, ...action.payload } : desk
+      );
+    });
   },
 });
+
+export default deskSlice.reducer;

@@ -4,3 +4,9 @@ export interface IBookingGetBookingQuery {
   order?: "asc" | "desc";
   page?: number;
 }
+
+export interface IBookingPaginationMetadata {
+  totalBookings: number;
+  totalPages: number;
+  currentPage: number;
+}
