@@ -123,10 +123,13 @@ export const forgotPasswordThunk = createAsyncThunk(
 
 export const resetPasswordThunk = createAsyncThunk(
   "auth/reset-password",
-  async (passwordData: IUserResetPassword, { rejectWithValue }) => {
+  async (
+    { token, ...passwordData }: { token: string } & IUserResetPassword,
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axios.post(
-        "/v1/auth/reset-password/:token",
+        `/v1/auth/reset-password/${token}`,
         passwordData
       );
       return response.data;
