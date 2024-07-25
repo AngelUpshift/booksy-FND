@@ -5,6 +5,7 @@ import bookingReducer from "./slices/bookingSlice";
 import deskReducer from "./slices/deskSlice";
 import roomReducer from "./slices/roomSlice";
 import userReducer from "./slices/userSlice";
+import { useDispatch as useReduxDispatch } from "react-redux";
 
 const store = configureStore({
   reducer: {
@@ -16,5 +17,8 @@ const store = configureStore({
     user: userReducer,
   },
 });
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useReduxDispatch;
 
 export default store;
