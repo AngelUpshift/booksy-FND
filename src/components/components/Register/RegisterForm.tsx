@@ -224,7 +224,6 @@ export const RegisterForm = () => {
           sx={{
             height: "42px",
             width: "100%",
-            marginBottom: "8px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
