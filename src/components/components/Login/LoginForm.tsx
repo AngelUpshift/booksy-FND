@@ -30,7 +30,7 @@ export const LoginForm = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "329px", // Fixed width
-        height: "451px", // Fixed height
+        height: "467px", // Fixed height
         padding: theme.spacing(2),
         backgroundColor: "white",
         gap: "50px", // Added gap for spacing between elements
@@ -47,7 +47,7 @@ export const LoginForm = () => {
         }}
       >
         <Typography
-          fontSize="26px"
+          fontSize="24px"
           fontWeight="700"
           width="324px"
           height="34px"
@@ -56,7 +56,7 @@ export const LoginForm = () => {
             gap: "0px",
             opacity: "0px",
           }}
-          fontFamily="Rubik"
+          fontStyle="Roboto"
           color="#000000"
           lineHeight="33.6px"
         >
@@ -65,7 +65,7 @@ export const LoginForm = () => {
         <Typography
           fontSize="20px"
           fontWeight="500"
-          fontFamily="Roboto"
+          fontStyle="Roboto"
           width="298px"
           height="56px"
           textAlign="left"
@@ -183,7 +183,7 @@ export const LoginForm = () => {
             lineHeight="16.8px"
             textAlign="right"
             underline="none"
-            fontFamily="Roboto"
+            fontStyle="Roboto"
             color="#3E3E3E"
           >
             Forgot Password?
@@ -208,8 +208,9 @@ export const LoginForm = () => {
               height: "50px",
               borderRadius: "100px",
               fontSize: "14px",
-              fontFamily: "Roboto",
-              fontWeight: "600",
+              fontStyle: "Roboto",
+              lineHeight: "16.8px",
+              fontWeight: "700",
               textTransform: "none", // Ensure text is not capitalized
             }}
           >
@@ -225,7 +226,7 @@ export const LoginForm = () => {
           }}
           fontSize="14px"
           lineHeight="19.6px"
-          fontFamily="Roboto"
+          fontStyle="Roboto"
           color="#686868"
           textAlign="center"
           fontWeight="600"
@@ -242,10 +243,11 @@ export const LoginForm = () => {
               height: "50px",
               borderRadius: "100px",
               fontSize: "14px",
-              fontFamily: "Roboto",
-              fontWeight: "600",
+              fontStyle: "Roboto",
+              fontWeight: "700",
               textTransform: "none", // Ensure text is not capitalized
               backgroundColor: "#FFFFFF",
+              lineHeight: "16.8px",
             }}
             href="/register"
           >
