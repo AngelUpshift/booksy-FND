@@ -5,6 +5,7 @@ import { IUserLogin } from "../../../types/auth/login";
 import { IUserChangePassword } from "../../../types/auth/changePassword";
 import { IUserForgotPassword } from "../../../types/auth/forgotPassword";
 import { IUserResetPassword } from "../../../types/auth/resetPassword";
+import axiosInstance from "../../../utils/axiosInstance";
 import axios from "axios";
 
 const initialState: IUser = {
@@ -23,7 +24,7 @@ export const registerThunk = createAsyncThunk(
   "auth/register",
   async (userData: IUserRegister, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/v1/auth/register", userData);
+      const response = await axiosInstance.post("/auth/register", userData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -39,7 +40,7 @@ export const loginThunk = createAsyncThunk(
   "auth/login",
   async (userData: IUserLogin, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/v1/auth/login", userData);
+      const response = await axiosInstance.post("/auth/login", userData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -55,7 +56,7 @@ export const logoutThunk = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/v1/auth/logout");
+      const response = await axiosInstance.post("/auth/logout");
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -71,7 +72,7 @@ export const meThunk = createAsyncThunk(
   "auth/me",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/v1/auth/me");
+      const response = await axiosInstance.get("/auth/me");
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -87,7 +88,7 @@ export const changePasswordThunk = createAsyncThunk(
   "auth/change-password",
   async (passwordData: IUserChangePassword, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         "/v1/auth/change-password",
         passwordData
       );
@@ -106,7 +107,7 @@ export const forgotPasswordThunk = createAsyncThunk(
   "auth/forgot-password",
   async (passwordData: IUserForgotPassword, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         "/v1/auth/forgot-password",
         passwordData
       );
@@ -128,7 +129,7 @@ export const resetPasswordThunk = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.patch(
+      const response = await axiosInstance.patch(
         `/v1/auth/reset-password/${token}`,
         passwordData
       );

@@ -173,7 +173,7 @@ export const LoginForm = () => {
             display: "flex",
             justifyContent: "flex-end",
             width: "100%",
-            marginTop: "15px",
+            marginTop: "20px",
           }}
         >
           <Link

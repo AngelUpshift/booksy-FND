@@ -6,6 +6,7 @@ import {
   IUserPaginationMetadata,
 } from "../../../types/user/getUser";
 import axios from "axios";
+import axiosInstance from "../../../utils/axiosInstance";
 
 interface IUserState {
   currentUser: IUser;
@@ -39,7 +40,9 @@ export const getUserThunk = createAsyncThunk(
   "user/getAll",
   async (queryParams: IUserGetUserQuery, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/v1/user/", { params: queryParams });
+      const response = await axiosInstance.get("/user/", {
+        params: queryParams,
+      });
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -55,7 +58,10 @@ export const putUserThunk = createAsyncThunk(
   "user/update",
   async (userData: IUserPutUser, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`/v1/user/${userData._id}`, userData);
+      const response = await axiosInstance.put(
+        `/user/${userData._id}`,
+        userData
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
