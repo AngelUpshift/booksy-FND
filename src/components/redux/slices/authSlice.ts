@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { IUserRegister } from "../../../types/auth/register";
-import { IUser, team, userRole } from "../../../types/user/user";
+import { IUser, userRole } from "../../../types/user/user";
 import { IUserLogin } from "../../../types/auth/login";
 import { IUserChangePassword } from "../../../types/auth/changePassword";
 import { IUserForgotPassword } from "../../../types/auth/forgotPassword";
@@ -12,10 +12,9 @@ const initialState: IUser = {
   _id: "",
   first_name: "",
   last_name: "",
-  team: "" as team,
+  team: "",
   email: "",
   password: "",
-  confirmPassword: "",
   role: "" as userRole,
   avatar_url: "",
 };
@@ -156,7 +155,6 @@ export const authSlice = createSlice({
       state.team = action.payload.team;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      state.confirmPassword = action.payload.confirmPassword;
     });
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       state.email = action.payload.email;
@@ -165,10 +163,9 @@ export const authSlice = createSlice({
     builder.addCase(logoutThunk.fulfilled, (state, action) => {
       state.first_name = "";
       state.last_name = "";
-      state.team = "" as team;
+      state.team = "";
       state.email = "";
       state.password = "";
-      state.confirmPassword = "";
       state.role = "" as userRole;
       state.avatar_url = "";
     });
@@ -179,21 +176,18 @@ export const authSlice = createSlice({
       state.team = action.payload.team;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      state.confirmPassword = action.payload.confirmPassword;
       state.role = action.payload.role;
       state.avatar_url = action.payload.avatar_url;
     });
     builder.addCase(changePasswordThunk.fulfilled, (state, action) => {
       state._id = action.payload._id;
       state.password = action.payload.password;
-      state.confirmPassword = action.payload.confirmPassword;
     });
     builder.addCase(forgotPasswordThunk.fulfilled, (state, action) => {
       state.email = action.payload.email;
     });
     builder.addCase(resetPasswordThunk.fulfilled, (state, action) => {
       state.password = action.payload.password;
-      state.confirmPassword = action.payload.confirmPassword;
     });
   },
 });

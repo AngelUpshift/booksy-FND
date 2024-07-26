@@ -9,7 +9,7 @@ import {
   IBookingPaginationMetadata,
 } from "../../../types/booking/getBooking";
 import { deskDirection, deskStatus } from "../../../types/desk/desk";
-import { team, userRole } from "../../../types/user/user";
+import { userRole } from "../../../types/user/user";
 import { IBookingPostBooking } from "../../../types/booking/postBooking";
 import { IBookingPutBooking } from "../../../types/booking/putBooking";
 import { IBookingCancelBookingParams } from "../../../types/booking/cancelBooking";
@@ -33,10 +33,9 @@ export const initialState: bookingState = {
       _id: "",
       first_name: "",
       last_name: "",
-      team: "" as team,
+      team: "",
       email: "",
       password: "",
-      confirmPassword: "",
       role: "" as userRole,
       avatar_url: "",
     },

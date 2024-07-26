@@ -1,4 +1,4 @@
-export type team = "FND" | "BND" | "QA" | "DESIGN" | "HR";
+export const team = ["FND", "BND", "QA", "DESIGN", "HR"];
 
 export enum userRole {
   ADMIN = "admin",
@@ -9,10 +9,9 @@ export interface IUser {
   _id: string;
   first_name: string;
   last_name: string;
-  team: team;
+  team: string;
   email: string;
   password: string;
-  confirmPassword: string;
   role: userRole;
   avatar_url: string;
   createdAt?: Date;

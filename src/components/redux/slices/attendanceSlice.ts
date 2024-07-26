@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { IAttendance } from "../../../types/attendance/attendance";
 import { bookingStatus, durationType } from "../../../types/booking/booking";
 import { deskDirection, deskStatus } from "../../../types/desk/desk";
-import { team, userRole } from "../../../types/user/user";
+import { userRole } from "../../../types/user/user";
 import { IAttendanceClockIn } from "../../../types/attendance/clockIn";
 import { IAttendanceClockOut } from "../../../types/attendance/clockOut";
 import axios from "axios";
@@ -13,10 +13,9 @@ export const initialState: IAttendance = {
     _id: "",
     first_name: "",
     last_name: "",
-    team: "" as team,
+    team: "",
     email: "",
     password: "",
-    confirmPassword: "",
     role: "" as userRole,
     avatar_url: "",
   },
@@ -28,10 +27,9 @@ export const initialState: IAttendance = {
       _id: "",
       first_name: "",
       last_name: "",
-      team: "" as team,
+      team: "",
       email: "",
       password: "",
-      confirmPassword: "",
       role: "" as userRole,
       avatar_url: "",
     },

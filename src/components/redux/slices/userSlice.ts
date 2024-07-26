@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { IUser, team, userRole } from "../../../types/user/user";
+import { IUser, userRole } from "../../../types/user/user";
 import { IUserPutUser } from "../../../types/user/putUser";
 import {
   IUserGetUserQuery,
@@ -20,10 +20,9 @@ const initialState: IUserState = {
     _id: "",
     first_name: "",
     last_name: "",
-    team: "" as team,
+    team: "",
     email: "",
     password: "",
-    confirmPassword: "",
     role: "" as userRole,
     avatar_url: "",
   },

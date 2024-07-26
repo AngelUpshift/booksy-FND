@@ -3,7 +3,7 @@ import { Box, TextField, Typography, Link, Button } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Email as EmailIcon, Lock as LockIcon } from "@mui/icons-material";
 import { useFormik } from "formik";
-import { validationSchema } from "./utils";
+import { validationSchemaLogin } from "./utils";
 import { useAppDispatch } from "../../redux/store"; // Use the typed version of useDispatch
 import { loginThunk } from "../../redux/slices/authSlice";
 
@@ -17,7 +17,7 @@ export const LoginForm = () => {
     onSubmit: (values) => {
       dispatch(loginThunk(values));
     },
-    validationSchema: validationSchema,
+    validationSchema: validationSchemaLogin,
   });
 
   const theme = useTheme();

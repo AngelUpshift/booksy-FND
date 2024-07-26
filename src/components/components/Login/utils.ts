@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const passwordPattern =
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
-export const validationSchema = Yup.object({
+export const validationSchemaLogin = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),

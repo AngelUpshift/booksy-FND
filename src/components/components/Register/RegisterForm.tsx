@@ -11,12 +11,35 @@ import {
 import InputAdornment from "@mui/material/InputAdornment";
 import PersonIcon from "@mui/icons-material/Person"; // Import the Person icon
 import { Email, Lock } from "@mui/icons-material";
+import { useFormik } from "formik";
+import { validationSchemaRegister } from "./utils";
+import { useAppDispatch } from "../../redux/store";
+import { registerThunk } from "../../redux/slices/authSlice";
 
 export const RegisterForm = () => {
+  const dispatch = useAppDispatch();
+
+  const formik = useFormik({
+    initialValues: {
+      first_name: "",
+      last_name: "",
+      team: "",
+      email: "",
+      password: "",
+      confirmPasword: "",
+    },
+    onSubmit: (values) => {
+      dispatch(registerThunk(values));
+    },
+    validationSchema: validationSchemaRegister,
+  });
+
   const theme = useTheme();
 
   return (
     <Box
+      component="form"
+      onSubmit={formik.handleSubmit}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -54,10 +77,14 @@ export const RegisterForm = () => {
         }}
       >
         <TextField
+          id="first_name"
+          value={formik.values.first_name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           sx={{
             height: "42px",
             width: "100%",
-            marginBottom: "8px",
+            marginBottom: "18px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
@@ -80,12 +107,18 @@ export const RegisterForm = () => {
               </InputAdornment>
             ),
           }}
+          error={formik.touched.first_name && Boolean(formik.errors.first_name)}
+          helperText={formik.touched.first_name && formik.errors.first_name}
         ></TextField>
         <TextField
+          id="last_name"
+          value={formik.values.last_name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           sx={{
             height: "42px",
             width: "100%",
-            marginBottom: "8px",
+            marginBottom: "18px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
@@ -108,16 +141,25 @@ export const RegisterForm = () => {
               </InputAdornment>
             ),
           }}
+          error={formik.touched.last_name && Boolean(formik.errors.last_name)}
+          helperText={formik.touched.last_name && formik.errors.last_name}
         ></TextField>
-        <FormControl fullWidth>
+        <FormControl
+          fullWidth
+          error={formik.touched.team && Boolean(formik.errors.team)}
+        >
           <Select
-            value=""
+            id="team"
+            name="team"
+            value={formik.values.team}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             variant="outlined"
             displayEmpty
             sx={{
               height: "42px",
               width: "100%",
-              marginBottom: "8px",
+              marginBottom: "18px",
               "& .MuiSelect-select": {
                 display: "flex",
                 alignItems: "center",
@@ -162,9 +204,9 @@ export const RegisterForm = () => {
                 lineHeight: "19.6px",
                 color: "#686868",
               }}
-              value="option1"
+              value="FND"
             >
-              Option 1
+              FrontEnd
             </MenuItem>
             <MenuItem
               sx={{
@@ -174,9 +216,9 @@ export const RegisterForm = () => {
                 lineHeight: "19.6px",
                 color: "#686868",
               }}
-              value="option2"
+              value="BND"
             >
-              Option 2
+              BackEnd
             </MenuItem>
             <MenuItem
               sx={{
@@ -186,17 +228,46 @@ export const RegisterForm = () => {
                 lineHeight: "19.6px",
                 color: "#686868",
               }}
-              value="option3"
+              value="Design"
             >
-              Option 3
+              Design
+            </MenuItem>
+            <MenuItem
+              sx={{
+                fontStyle: "Roboto",
+                fontSize: "14px",
+                fontWeight: "400",
+                lineHeight: "19.6px",
+                color: "#686868",
+              }}
+              value="QA"
+            >
+              Quality assurance
+            </MenuItem>
+            <MenuItem
+              sx={{
+                fontStyle: "Roboto",
+                fontSize: "14px",
+                fontWeight: "400",
+                lineHeight: "19.6px",
+                color: "#686868",
+              }}
+              value="HR"
+            >
+              Human resources
             </MenuItem>
           </Select>
         </FormControl>
         <TextField
+          id="email"
+          value={formik.values.email}
+          type="email"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           sx={{
             height: "42px",
             width: "100%",
-            marginBottom: "8px",
+            marginBottom: "18px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
@@ -207,7 +278,7 @@ export const RegisterForm = () => {
               fontSize: "14px",
             },
           }}
-          placeholder="Last Name"
+          placeholder="Email"
           variant="outlined"
           InputProps={{
             style: {
@@ -219,8 +290,15 @@ export const RegisterForm = () => {
               </InputAdornment>
             ),
           }}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
         ></TextField>
         <TextField
+          id="password"
+          value={formik.values.password}
+          type="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           sx={{
             height: "42px",
             width: "100%",
@@ -234,7 +312,7 @@ export const RegisterForm = () => {
               fontSize: "14px",
             },
           }}
-          placeholder="Last Name"
+          placeholder="Password"
           variant="outlined"
           InputProps={{
             style: {
@@ -246,6 +324,8 @@ export const RegisterForm = () => {
               </InputAdornment>
             ),
           }}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
         ></TextField>
       </Box>
       <Box
@@ -256,6 +336,7 @@ export const RegisterForm = () => {
           opacity: "0px",
           left: "35px",
           top: "618px",
+          marginTop: "15px",
         }}
       >
         <Box width="100%" height="50px">
