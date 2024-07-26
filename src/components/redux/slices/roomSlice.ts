@@ -9,6 +9,7 @@ import { IRoomPutRoom } from "../../../types/room/putRoom";
 import { IImage, IRoom, roomStatus, roomType } from "../../../types/room/room";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import axiosInstance from "../../../utils/axiosInstance";
 
 export interface roomState {
   currentRoom: IRoom;
@@ -40,7 +41,10 @@ export const putRoomThunk = createAsyncThunk(
   "room/update",
   async (roomData: IRoomPutRoom, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`/v1/room/${roomData._id}`, roomData);
+      const response = await axiosInstance.put(
+        `/room/${roomData._id}`,
+        roomData
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -56,7 +60,7 @@ export const postRoomThunk = createAsyncThunk(
   "room/create",
   async (roomData: IRoomPostRoom, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/v1/room/", roomData);
+      const response = await axiosInstance.post("/room/", roomData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -72,7 +76,9 @@ export const getRoomThunk = createAsyncThunk(
   "room/getAll",
   async (queryParams: IRoomGetRoomQuery, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/v1/room/", { params: queryParams });
+      const response = await axiosInstance.get("/room/", {
+        params: queryParams,
+      });
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -88,7 +94,7 @@ export const getRoomByIdThunk = createAsyncThunk(
   "room/getById",
   async (roomData: IRoomGetRoomByIdParams, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/v1/room/${roomData._id}`);
+      const response = await axiosInstance.get(`/room/${roomData._id}`);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

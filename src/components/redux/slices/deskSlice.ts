@@ -8,6 +8,7 @@ import { IDeskPostDesk } from "../../../types/desk/postDesk";
 import { IDeskPutDesk } from "../../../types/desk/putDesk";
 import { IDeskGetDeskByIdParams } from "../../../types/desk/getDeskById";
 import axios from "axios";
+import axiosInstance from "../../../utils/axiosInstance";
 
 export interface deskState {
   currentDesk: IDesk;
@@ -38,7 +39,7 @@ export const getDeskByIdThunk = createAsyncThunk(
   "desk/getById",
   async (deskData: IDeskGetDeskByIdParams, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/v1/desk/${deskData._id}`);
+      const response = await axiosInstance.get(`/desk/${deskData._id}`);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -54,7 +55,9 @@ export const getDeskThunk = createAsyncThunk(
   "desk/getAll",
   async (queryParams: IDeskGetDeskQuery, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/v1/desk/", { params: queryParams });
+      const response = await axiosInstance.get("/desk/", {
+        params: queryParams,
+      });
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -70,7 +73,7 @@ export const postDeskThunk = createAsyncThunk(
   "desk/create",
   async (deskData: IDeskPostDesk, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/v1/desk/", deskData);
+      const response = await axiosInstance.post("/desk/", deskData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -86,7 +89,10 @@ export const putDeskThunk = createAsyncThunk(
   "desk/update",
   async (deskData: IDeskPutDesk, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`/v1/desk/${deskData._id}`, deskData);
+      const response = await axiosInstance.put(
+        `/desk/${deskData._id}`,
+        deskData
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
