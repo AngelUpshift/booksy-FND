@@ -40,9 +40,11 @@ export const LoginForm = () => {
     >
       <Box
         sx={{
+          display: "flex",
+          flexDirection: "column",
           width: "324px", // Fixed width
           height: "106px", // Fixed height
-          gap: "0px",
+          gap: "10px",
           opacity: "0px",
         }}
       >
@@ -53,7 +55,6 @@ export const LoginForm = () => {
           height="34px"
           textAlign="left"
           sx={{
-            gap: "0px",
             opacity: "0px",
           }}
           fontStyle="Roboto"
@@ -72,7 +73,6 @@ export const LoginForm = () => {
           color="#3E3E3E"
           sx={{
             top: "50px",
-            gap: "0px",
             opacity: "0px",
           }}
           lineHeight="28px"
@@ -84,8 +84,6 @@ export const LoginForm = () => {
         sx={{
           width: "324px", // Fixed width
           height: "117px", // Fixed height
-          gap: "0px",
-          opacity: "0px",
         }}
       >
         <TextField
@@ -192,37 +190,36 @@ export const LoginForm = () => {
       </Box>
       <Box
         sx={{
+          display: "flex",
+          flexDirection: "column",
           width: "329px", // Fixed width
           height: "144px", // Fixed height
           gap: "12px",
           opacity: "0px",
         }}
       >
-        <Box width="329px" height="50px">
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            fullWidth
-            sx={{
-              height: "50px",
-              borderRadius: "100px",
-              fontSize: "14px",
-              fontStyle: "Roboto",
-              lineHeight: "16.8px",
-              fontWeight: "700",
-              textTransform: "none", // Ensure text is not capitalized
-            }}
-          >
-            Log In
-          </Button>
-        </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+          fullWidth
+          sx={{
+            height: "50px",
+            borderRadius: "100px",
+            fontSize: "14px",
+            fontStyle: "Roboto",
+            lineHeight: "16.8px",
+            fontWeight: "700",
+            textTransform: "none", // Ensure text is not capitalized
+          }}
+        >
+          Log In
+        </Button>
 
-        <Box
+        <Typography
           sx={{
             width: "329px",
             height: "20px",
-            paddingTop: "10px",
           }}
           fontSize="14px"
           lineHeight="19.6px"
@@ -231,29 +228,27 @@ export const LoginForm = () => {
           textAlign="center"
           fontWeight="600"
         >
-          <span>Don't have an account ?</span>
-        </Box>
-        <Box width="329px" height="50px" paddingTop="15px">
-          <Button
-            type="submit"
-            variant="outlined"
-            size="large"
-            fullWidth
-            sx={{
-              height: "50px",
-              borderRadius: "100px",
-              fontSize: "14px",
-              fontStyle: "Roboto",
-              fontWeight: "700",
-              textTransform: "none", // Ensure text is not capitalized
-              backgroundColor: "#FFFFFF",
-              lineHeight: "16.8px",
-            }}
-            href="/register"
-          >
-            Create an account
-          </Button>
-        </Box>
+          Don't have an account ?
+        </Typography>
+        <Button
+          type="submit"
+          variant="outlined"
+          size="large"
+          fullWidth
+          sx={{
+            height: "50px",
+            borderRadius: "100px",
+            fontSize: "14px",
+            fontStyle: "Roboto",
+            fontWeight: "700",
+            textTransform: "none", // Ensure text is not capitalized
+            backgroundColor: "#FFFFFF",
+            lineHeight: "16.8px",
+          }}
+          href="/register"
+        >
+          Create an account
+        </Button>
       </Box>
     </Box>
   );

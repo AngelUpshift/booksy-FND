@@ -44,35 +44,39 @@ export const RegisterForm = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "329px", // Fixed width
-        height: "467px", // Fixed height
         padding: theme.spacing(2),
         backgroundColor: "white",
-        gap: "50px", // Added gap for spacing between elements
-        top: "292px",
+        gap: "25px", // Added gap for spacing between elements
         left: "32px",
       }}
     >
-      <Typography
+      <Box
         sx={{
           width: "100%",
-          height: "34px",
-          top: "292px",
-          left: "92px",
           textAlign: "center",
-          fontStyle: "Roboto",
-          fontWeight: "700",
-          fontSize: "24px",
-          lineHeight: "33.6px",
+          top: "292px",
+          height: "34px",
         }}
       >
-        Create an Account
-      </Typography>
+        <Typography
+          sx={{
+            fontStyle: "Roboto",
+            fontWeight: "700",
+            fontSize: "24px",
+            lineHeight: "33.6px",
+          }}
+        >
+          Create an Account
+        </Typography>
+      </Box>
       <Box
         sx={{
           width: "324px",
-          height: "242px",
           top: "356px",
           left: "35px",
+          gap: "8px",
+          display: "flex", // Added display flex
+          flexDirection: "column", // Set flex direction to column
         }}
       >
         <TextField
@@ -83,7 +87,7 @@ export const RegisterForm = () => {
           sx={{
             height: "42px",
             width: "100%",
-            marginBottom: "18px",
+            marginBottom: "11px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
@@ -115,9 +119,10 @@ export const RegisterForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           sx={{
+            marginBottom: "11px",
+
             height: "42px",
             width: "100%",
-            marginBottom: "18px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
@@ -158,7 +163,6 @@ export const RegisterForm = () => {
             sx={{
               height: "42px",
               width: "100%",
-              marginBottom: "18px",
               "& .MuiSelect-select": {
                 display: "flex",
                 alignItems: "center",
@@ -264,9 +268,10 @@ export const RegisterForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           sx={{
+            marginBottom: "11px",
+
             height: "42px",
             width: "100%",
-            marginBottom: "18px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
@@ -329,40 +334,37 @@ export const RegisterForm = () => {
       </Box>
       <Box
         sx={{
+          display: "flex",
+          flexDirection: "column",
           width: "324px", // Fixed width
           height: "144px", // Fixed height
           gap: "12px",
           opacity: "0px",
           left: "35px",
-          top: "618px",
-          marginTop: "15px",
         }}
       >
-        <Box width="100%" height="50px">
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            fullWidth
-            sx={{
-              height: "50px",
-              borderRadius: "100px",
-              fontSize: "14px",
-              fontStyle: "Roboto",
-              lineHeight: "16.8px",
-              fontWeight: "700",
-              textTransform: "none", // Ensure text is not capitalized
-            }}
-          >
-            Create Account
-          </Button>
-        </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+          fullWidth
+          sx={{
+            height: "50px",
+            borderRadius: "100px",
+            fontSize: "14px",
+            fontStyle: "Roboto",
+            lineHeight: "16.8px",
+            fontWeight: "700",
+            textTransform: "none", // Ensure text is not capitalized
+          }}
+        >
+          Create Account
+        </Button>
 
-        <Box
+        <Typography
           sx={{
             width: "100%",
             height: "20px",
-            paddingTop: "10px",
           }}
           fontSize="14px"
           lineHeight="19.6px"
@@ -371,29 +373,27 @@ export const RegisterForm = () => {
           textAlign="center"
           fontWeight="600"
         >
-          <span>Already have an account</span>
-        </Box>
-        <Box width="100%" height="50px" paddingTop="15px">
-          <Button
-            type="submit"
-            variant="outlined"
-            size="large"
-            fullWidth
-            sx={{
-              height: "50px",
-              borderRadius: "100px",
-              fontSize: "14px",
-              fontStyle: "Roboto",
-              fontWeight: "700",
-              textTransform: "none", // Ensure text is not capitalized
-              backgroundColor: "#FFFFFF",
-              lineHeight: "16.8px",
-            }}
-            href="/login"
-          >
-            Login
-          </Button>
-        </Box>
+          Already have an account?
+        </Typography>
+        <Button
+          type="submit"
+          variant="outlined"
+          size="large"
+          fullWidth
+          sx={{
+            height: "50px",
+            borderRadius: "100px",
+            fontSize: "14px",
+            fontStyle: "Roboto",
+            fontWeight: "700",
+            textTransform: "none", // Ensure text is not capitalized
+            backgroundColor: "#FFFFFF",
+            lineHeight: "16.8px",
+          }}
+          href="/login"
+        >
+          Login
+        </Button>
       </Box>
     </Box>
   );
