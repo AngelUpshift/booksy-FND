@@ -149,12 +149,7 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(registerThunk.fulfilled, (state, action) => {
-      state._id = action.payload._id;
-      state.first_name = action.payload.first_name;
-      state.last_name = action.payload.last_name;
-      state.team = action.payload.team;
-      state.email = action.payload.email;
-      state.password = action.payload.password;
+      state = action.payload;
     });
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       state.email = action.payload.email;

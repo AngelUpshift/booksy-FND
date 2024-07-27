@@ -26,7 +26,6 @@ export const RegisterForm = () => {
       team: "",
       email: "",
       password: "",
-      confirmPasword: "",
     },
     onSubmit: (values) => {
       dispatch(registerThunk(values));
