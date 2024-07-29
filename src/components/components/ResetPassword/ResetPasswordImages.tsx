@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import logo from "../../../img/login/Booksy-logos-blue.psd.jpg";
 
-export const RegisterImages = () => {
+export const ResetPasswordImages = () => {
   return (
     <Box
       component="img"

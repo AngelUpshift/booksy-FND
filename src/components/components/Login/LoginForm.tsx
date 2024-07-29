@@ -34,8 +34,8 @@ export const LoginForm = () => {
         padding: theme.spacing(2),
         backgroundColor: "white",
         gap: "50px", // Added gap for spacing between elements
-        top: "292px",
         left: "32px",
+        paddingTop: "50px",
       }}
     >
       <Box
