@@ -9,7 +9,6 @@ export const LoginImages = () => {
       sx={{
         width: "100%",
         maxWidth: "239px",
-        marginBottom: 2,
       }}
     />
   );

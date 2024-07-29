@@ -26,6 +26,7 @@ export const RegisterPage = () => {
           padding: theme.spacing(2),
           borderRadius: 2,
           backgroundColor: "white",
+          paddingTop: "70px",
         }}
       >
         <RegisterImages />

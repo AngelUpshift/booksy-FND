@@ -88,7 +88,7 @@ export const changePasswordThunk = createAsyncThunk(
   async (passwordData: IUserChangePassword, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(
-        "/v1/auth/change-password",
+        "/auth/change-password",
         passwordData
       );
       return response.data;
@@ -107,7 +107,7 @@ export const forgotPasswordThunk = createAsyncThunk(
   async (passwordData: IUserForgotPassword, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(
-        "/v1/auth/forgot-password",
+        "/auth/forgot-password",
         passwordData
       );
       return response.data;
@@ -124,12 +124,15 @@ export const forgotPasswordThunk = createAsyncThunk(
 export const resetPasswordThunk = createAsyncThunk(
   "auth/reset-password",
   async (
-    { token, ...passwordData }: { token: string } & IUserResetPassword,
+    {
+      token,
+      ...passwordData
+    }: { token: string | undefined } & IUserResetPassword,
     { rejectWithValue }
   ) => {
     try {
       const response = await axiosInstance.patch(
-        `/v1/auth/reset-password/${token}`,
+        `/auth/reset-password/${token}`,
         passwordData
       );
       return response.data;

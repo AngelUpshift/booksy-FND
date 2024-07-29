@@ -46,15 +46,14 @@ export const RegisterForm = () => {
         width: "329px", // Fixed width
         padding: theme.spacing(2),
         backgroundColor: "white",
-        gap: "25px", // Added gap for spacing between elements
         left: "32px",
+        paddingTop: "50px",
       }}
     >
       <Box
         sx={{
           width: "100%",
           textAlign: "center",
-          top: "292px",
           height: "34px",
         }}
       >
@@ -72,7 +71,7 @@ export const RegisterForm = () => {
       <Box
         sx={{
           width: "324px",
-          top: "356px",
+          paddingTop: "30px",
           left: "35px",
           gap: "8px",
           display: "flex", // Added display flex
@@ -337,10 +336,11 @@ export const RegisterForm = () => {
           display: "flex",
           flexDirection: "column",
           width: "324px", // Fixed width
-          height: "144px", // Fixed height
+          height: "164px", // Fixed height
           gap: "12px",
           opacity: "0px",
           left: "35px",
+          paddingTop: "20px",
         }}
       >
         <Button
