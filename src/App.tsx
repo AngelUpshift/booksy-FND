@@ -35,9 +35,10 @@ const App = () => {
         <Route
           path="room"
           element={
-            <ProtectedRoute>
-              <RoomsPage />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            //   <RoomsPage />
+            // </ProtectedRoute>
+            <RoomsPage />
           }
         />
         <Route path="*" element={<Navigate to="room" />} />
