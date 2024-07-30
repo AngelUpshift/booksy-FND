@@ -43,6 +43,7 @@ export const RoomsForm = () => {
         component="img"
         src={logo}
         sx={{
+          left: "25px",
           width: "100%",
         }}
       ></Box>
