@@ -13,6 +13,7 @@ export const ForgotPasswordPage = () => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "100vh",
+        padding: theme.spacing(2),
       }}
     >
       <Box
@@ -24,7 +25,7 @@ export const ForgotPasswordPage = () => {
           padding: theme.spacing(2),
           borderRadius: 2,
           backgroundColor: "white",
-          paddingTop: "70px",
+          overflow: "hidden", // Prevent overflow
         }}
       >
         <ForgotPasswordImages />

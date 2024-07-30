@@ -1,5 +1,12 @@
 import { useTheme } from "@mui/material/styles";
-import { Box, TextField, Typography, Link, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Link,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Email as EmailIcon, Lock as LockIcon } from "@mui/icons-material";
 import { useFormik } from "formik";
@@ -21,6 +28,8 @@ export const LoginForm = () => {
   });
 
   const theme = useTheme();
+
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
       component="form"
@@ -29,12 +38,14 @@ export const LoginForm = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "329px", // Fixed width
+        maxWidth: "329px", // Fixed width
+        width: "100%",
         height: "467px", // Fixed height
         padding: theme.spacing(2),
         backgroundColor: "white",
-        gap: "50px", // Added gap for spacing between elements
+        gap: theme.spacing(2), // Added gap for spacing between elements
         left: "32px",
+        boxSizing: "border-box", // Ensure padding doesn't cause overflow
         paddingTop: "50px",
       }}
     >
@@ -42,17 +53,16 @@ export const LoginForm = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: "324px", // Fixed width
+          maxWidth: isSmallScreen ? "100%" : "324px", // Responsive width
           height: "106px", // Fixed height
           gap: "10px",
           opacity: "0px",
         }}
       >
         <Typography
-          fontSize="24px"
+          fontSize={isSmallScreen ? "20px" : "24px"}
           fontWeight="700"
-          width="324px"
-          height="34px"
+          width={isSmallScreen ? "100%" : "324px"} // Responsive width
           textAlign="left"
           sx={{
             opacity: "0px",
@@ -64,16 +74,14 @@ export const LoginForm = () => {
           Welcome to Upshift Booksy
         </Typography>
         <Typography
-          fontSize="20px"
+          fontSize={isSmallScreen ? "16px" : "20px"}
           fontWeight="500"
           fontStyle="Roboto"
-          width="298px"
-          height="56px"
           textAlign="left"
           color="#3E3E3E"
           sx={{
-            top: "50px",
             opacity: "0px",
+            width: isSmallScreen ? "100%" : "298px",
           }}
           lineHeight="28px"
         >
@@ -82,8 +90,11 @@ export const LoginForm = () => {
       </Box>
       <Box
         sx={{
-          width: "324px", // Fixed width
-          height: "117px", // Fixed height
+          width: "100%", // Fixed width
+          maxWidth: isSmallScreen ? "100%" : "324px",
+          gap: theme.spacing(1),
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <TextField
@@ -119,14 +130,6 @@ export const LoginForm = () => {
           value={formik.values.email}
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
-          //   InputLabelProps={{
-          //     sx: {
-          //       left: "0px",
-          //       "&.MuiInputLabel-shrink": {
-          //         left: "0px",
-          //       },
-          //     },
-          //   }}
         />
         <TextField
           id="password"
@@ -136,7 +139,6 @@ export const LoginForm = () => {
           sx={{
             height: "42px",
             width: "100%",
-            marginTop: "20px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
@@ -146,9 +148,6 @@ export const LoginForm = () => {
             "& .MuiInputBase-input::placeholder": {
               fontSize: "14px",
             },
-            // "& .MuiInputLabel-root": {
-            //   top: "-8px",
-            // },
           }}
           InputProps={{
             style: {
@@ -171,12 +170,11 @@ export const LoginForm = () => {
             display: "flex",
             justifyContent: "flex-end",
             width: "100%",
-            marginTop: "20px",
           }}
         >
           <Link
             href="/forgot-password"
-            fontSize="12px"
+            fontSize={isSmallScreen ? "10px" : "12px"}
             fontWeight="600"
             lineHeight="16.8px"
             textAlign="right"
@@ -192,9 +190,9 @@ export const LoginForm = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: "329px", // Fixed width
-          height: "144px", // Fixed height
-          gap: "12px",
+          width: "100%", // Fixed width
+          maxWidth: isSmallScreen ? "100%" : "329px", // Responsive width
+          gap: theme.spacing(1.5),
           opacity: "0px",
         }}
       >
@@ -206,7 +204,7 @@ export const LoginForm = () => {
           sx={{
             height: "50px",
             borderRadius: "100px",
-            fontSize: "14px",
+            fontSize: isSmallScreen ? "12px" : "14px",
             fontStyle: "Roboto",
             lineHeight: "16.8px",
             fontWeight: "700",
@@ -221,7 +219,7 @@ export const LoginForm = () => {
             width: "329px",
             height: "20px",
           }}
-          fontSize="14px"
+          fontSize={isSmallScreen ? "12px" : "14px"}
           lineHeight="19.6px"
           fontStyle="Roboto"
           color="#686868"
@@ -238,7 +236,7 @@ export const LoginForm = () => {
           sx={{
             height: "50px",
             borderRadius: "100px",
-            fontSize: "14px",
+            fontSize: isSmallScreen ? "12px" : "14px",
             fontStyle: "Roboto",
             fontWeight: "700",
             textTransform: "none", // Ensure text is not capitalized

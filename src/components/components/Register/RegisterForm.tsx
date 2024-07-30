@@ -7,6 +7,7 @@ import {
   Select,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import PersonIcon from "@mui/icons-material/Person"; // Import the Person icon
@@ -35,6 +36,8 @@ export const RegisterForm = () => {
 
   const theme = useTheme();
 
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Box
       component="form"
@@ -44,9 +47,11 @@ export const RegisterForm = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "329px", // Fixed width
+        maxWidth: "100%",
         padding: theme.spacing(2),
         backgroundColor: "white",
         left: "32px",
+        boxSizing: "border-box", // Ensure padding doesn't cause overflow
         paddingTop: "50px",
       }}
     >
@@ -54,14 +59,13 @@ export const RegisterForm = () => {
         sx={{
           width: "100%",
           textAlign: "center",
-          height: "34px",
         }}
       >
         <Typography
           sx={{
             fontStyle: "Roboto",
             fontWeight: "700",
-            fontSize: "24px",
+            fontSize: isSmallScreen ? "20px" : "24px",
             lineHeight: "33.6px",
           }}
         >
@@ -71,9 +75,10 @@ export const RegisterForm = () => {
       <Box
         sx={{
           width: "324px",
+          maxWidth: isSmallScreen ? "100%" : "324px",
           paddingTop: "30px",
           left: "35px",
-          gap: "8px",
+          gap: theme.spacing(1),
           display: "flex", // Added display flex
           flexDirection: "column", // Set flex direction to column
         }}
@@ -86,7 +91,6 @@ export const RegisterForm = () => {
           sx={{
             height: "42px",
             width: "100%",
-            marginBottom: "11px",
             "& .MuiInputBase-root": {
               height: "100%",
             },
@@ -118,8 +122,6 @@ export const RegisterForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           sx={{
-            marginBottom: "11px",
-
             height: "42px",
             width: "100%",
             "& .MuiInputBase-root": {
@@ -267,8 +269,6 @@ export const RegisterForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           sx={{
-            marginBottom: "11px",
-
             height: "42px",
             width: "100%",
             "& .MuiInputBase-root": {
@@ -335,10 +335,9 @@ export const RegisterForm = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: "324px", // Fixed width
-          height: "164px", // Fixed height
-          gap: "12px",
-          opacity: "0px",
+          width: "100%", // Fixed width
+          maxWidth: isSmallScreen ? "100%" : "324px",
+          gap: theme.spacing(1.5),
           left: "35px",
           paddingTop: "20px",
         }}
@@ -351,7 +350,7 @@ export const RegisterForm = () => {
           sx={{
             height: "50px",
             borderRadius: "100px",
-            fontSize: "14px",
+            fontSize: isSmallScreen ? "12px" : "14px",
             fontStyle: "Roboto",
             lineHeight: "16.8px",
             fontWeight: "700",
@@ -364,9 +363,8 @@ export const RegisterForm = () => {
         <Typography
           sx={{
             width: "100%",
-            height: "20px",
           }}
-          fontSize="14px"
+          fontSize={isSmallScreen ? "12px" : "14px"}
           lineHeight="19.6px"
           fontStyle="Roboto"
           color="#686868"
@@ -383,7 +381,7 @@ export const RegisterForm = () => {
           sx={{
             height: "50px",
             borderRadius: "100px",
-            fontSize: "14px",
+            fontSize: isSmallScreen ? "12px" : "14px",
             fontStyle: "Roboto",
             fontWeight: "700",
             textTransform: "none", // Ensure text is not capitalized

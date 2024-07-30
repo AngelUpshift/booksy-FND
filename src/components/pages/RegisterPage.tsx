@@ -15,6 +15,7 @@ export const RegisterPage = () => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "100vh",
+        padding: theme.spacing(2),
       }}
     >
       <Box
@@ -26,7 +27,7 @@ export const RegisterPage = () => {
           padding: theme.spacing(2),
           borderRadius: 2,
           backgroundColor: "white",
-          paddingTop: "70px",
+          overflow: "hidden", // Prevent overflow
         }}
       >
         <RegisterImages />
