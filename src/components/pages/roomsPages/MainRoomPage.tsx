@@ -1,10 +1,8 @@
 import { Box, Container, useTheme } from "@mui/material";
-import { RoomsForm } from "../components/Rooms/RoomsForm";
-import { NavigationBar } from "../components/NavigationBar/NavigationBar";
+import { MainRoomForm } from "../../components/Rooms/MainRoomForm";
 
-export const RoomsPage = () => {
+export const MainRoomPage = () => {
   const theme = useTheme();
-
   return (
     <Container
       maxWidth="xs"
@@ -29,8 +27,7 @@ export const RoomsPage = () => {
           overflow: "hidden", // Prevent overflow
         }}
       >
-        <RoomsForm />
-        <NavigationBar />
+        <MainRoomForm />
       </Box>
     </Container>
   );
