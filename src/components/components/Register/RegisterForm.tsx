@@ -232,7 +232,7 @@ export const RegisterForm = () => {
                 lineHeight: "19.6px",
                 color: "#686868",
               }}
-              value="Design"
+              value="DESIGN"
             >
               Design
             </MenuItem>
