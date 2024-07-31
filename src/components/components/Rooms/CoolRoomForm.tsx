@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
 
-export const MainRoomForm = () => {
+export const CoolRoomForm = () => {
   return (
     <Box
       sx={{
-        width: "220px",
+        width: "280px",
         display: "flex",
         flexDirection: "column",
         alignItems: "left",
@@ -24,7 +24,7 @@ export const MainRoomForm = () => {
         fontWeight="700"
         lineHeight="33.6px"
       >
-        Main Dev Room 🏣
+        The Cool Last Room 🏣{" "}
       </Typography>
       <Box
         sx={{

@@ -1,5 +1,7 @@
 import { Box, Container, useTheme } from "@mui/material";
 import { MainRoomForm } from "../../components/Rooms/MainRoomForm";
+import { NavigationBar } from "../../components/NavigationBar/NavigationBar";
+import { ButtonBack } from "../../components/ButtonBack/ButtonBack";
 
 export const MainRoomPage = () => {
   const theme = useTheme();
@@ -27,7 +29,9 @@ export const MainRoomPage = () => {
           overflow: "hidden", // Prevent overflow
         }}
       >
+        <ButtonBack />
         <MainRoomForm />
+        <NavigationBar />
       </Box>
     </Container>
   );
