@@ -1,7 +1,6 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Link } from "react-router-dom";
-import logo from "../../../img/Picture.jpg";
 
 export const MyProfileForm = () => {
   return (
