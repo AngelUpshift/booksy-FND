@@ -1,8 +1,8 @@
 import { Box, Container, useTheme } from "@mui/material";
 import { NavigationBar } from "../components/NavigationBar/NavigationBar";
-import { ClockInForm } from "../components/ClockIn/ClockInForm";
+import { ClockOutForm } from "../components/ClockOut/ClockOutForm";
 
-export const ClockInPage = () => {
+export const ClockOutPage = () => {
   const theme = useTheme();
   return (
     <Container
@@ -29,7 +29,7 @@ export const ClockInPage = () => {
           overflow: "hidden",
         }}
       >
-        <ClockInForm />
+        <ClockOutForm />
         <NavigationBar />
       </Box>
     </Container>

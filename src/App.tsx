@@ -11,10 +11,11 @@ import { RoomsPage } from "./components/pages/RoomsPage";
 import { ProtectedRoute } from "./components/routes/ProtectedRoute";
 import { ClockInPage } from "./components/pages/ClockInPage";
 import { MyProfilePage } from "./components/pages/MyProfilePage";
-import { DeskPage } from "./components/pages/DeskPage";
 import { MainRoomPage } from "./components/pages/roomsPages/MainRoomPage";
 import { SmallRoomPage } from "./components/pages/roomsPages/SmallRoomPage";
 import { CoolRoomPage } from "./components/pages/roomsPages/CoolRoomPage";
+import { EditProfilePage } from "./components/pages/EditProfilePage";
+import { ClockOutPage } from "./components/pages/ClockOutPage";
 
 const App = () => {
   const theme = createTheme({
@@ -51,7 +52,9 @@ const App = () => {
         <Route path="room/small-reserve-desk" element={<SmallRoomPage />} />
         <Route path="room/cool-reserve-desk" element={<CoolRoomPage />} />
         <Route path="/clock-in" element={<ClockInPage />} />
+        <Route path="/clock-out" element={<ClockOutPage />} />
         <Route path="/me" element={<MyProfilePage />} />
+        <Route path="/editProfile" element={<EditProfilePage />} />
         <Route path="*" element={<Navigate to="room" />} />
       </Routes>
     </ThemeProvider>
