@@ -3,10 +3,12 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Link } from "react-router-dom";
 import logo from "../../img/Picture.jpg";
 import { NavigationBar } from "../components/NavigationBar/NavigationBar";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 export const MyProfilePage = () => {
   return (
     <Container
+      component="form"
       maxWidth="xs"
       sx={{
         display: "flex",
@@ -17,6 +19,16 @@ export const MyProfilePage = () => {
         backgroundColor: "#FFFFFF",
       }}
     >
+      {/* Logout Icon */}
+      <Link to="/login" style={{ position: "absolute", top: 70, right: 16 }}>
+        <LogoutIcon
+          sx={{
+            width: 32,
+            height: 32,
+            color: "#B71C1C",
+          }}
+        />
+      </Link>
       {/* Profile Section */}
       <Box
         sx={{
@@ -24,7 +36,7 @@ export const MyProfilePage = () => {
           flexDirection: "column",
           alignItems: "center",
           width: "100%",
-          mt: 8,
+          mt: 9,
         }}
       >
         <Box
