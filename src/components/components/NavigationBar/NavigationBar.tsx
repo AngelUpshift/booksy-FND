@@ -12,7 +12,7 @@ export const NavigationBar = () => {
         flexDirection: "row",
         alignItems: "center",
         height: "71px",
-        position: "absolute",
+        position: "fixed",
         bottom: 0,
         backgroundColor: "white",
         boxShadow: "0 -2px 5px rgba(0, 0, 0, 0.1)",
