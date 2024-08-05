@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import React from "react";
 
@@ -7,11 +6,11 @@ type TProps = {
 };
 
 export const ProtectedRoute = ({ children }: TProps) => {
-  const token = Cookies.get("access-token-cookie");
+  const token = localStorage.getItem("token");
 
-  if (!token) {
+  if (token === null || token === "undefined") {
     return <Navigate to="/login" replace />;
   }
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
