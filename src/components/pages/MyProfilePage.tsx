@@ -155,7 +155,7 @@ export const MyProfilePage = () => {
           >
             Emily’s Profile
           </Typography>
-          <Link to="/editProfile">
+          <Link to="/editProfile/:id">
             <SettingsOutlinedIcon
               sx={{
                 ml: 1,

@@ -8,7 +8,8 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Email as EmailIcon, Lock as LockIcon } from "@mui/icons-material";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useFormik } from "formik";
 import { validationSchemaLogin } from "./utils";
 import { useAppDispatch } from "../../redux/store"; // Use the typed version of useDispatch
@@ -121,7 +122,9 @@ export const LoginForm = () => {
             },
             startAdornment: (
               <InputAdornment position="start">
-                <EmailIcon sx={{ width: "20px", height: "20px" }} />
+                <MailOutlineOutlinedIcon
+                  sx={{ width: "20px", height: "20px" }}
+                />
               </InputAdornment>
             ),
           }}
@@ -155,7 +158,7 @@ export const LoginForm = () => {
             },
             startAdornment: (
               <InputAdornment position="start">
-                <LockIcon sx={{ width: "20px", height: "20px" }} />
+                <LockOutlinedIcon sx={{ width: "20px", height: "20px" }} />
               </InputAdornment>
             ),
           }}
