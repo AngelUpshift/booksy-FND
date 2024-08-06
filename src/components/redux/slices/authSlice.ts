@@ -63,6 +63,9 @@ export const logoutThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post("/auth/logout");
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
