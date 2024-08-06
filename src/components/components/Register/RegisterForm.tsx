@@ -10,8 +10,10 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-import PersonIcon from "@mui/icons-material/Person"; // Import the Person icon
-import { Email, Lock } from "@mui/icons-material";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useFormik } from "formik";
 import { validationSchemaRegister } from "./utils";
 import { useAppDispatch } from "../../redux/store";
@@ -109,7 +111,9 @@ export const RegisterForm = () => {
             },
             startAdornment: (
               <InputAdornment position="start">
-                <PersonIcon sx={{ width: "20px", height: "20px" }} />
+                <PersonOutlineOutlinedIcon
+                  sx={{ width: "20px", height: "20px" }}
+                />
               </InputAdornment>
             ),
           }}
@@ -142,7 +146,9 @@ export const RegisterForm = () => {
             },
             startAdornment: (
               <InputAdornment position="start">
-                <PersonIcon sx={{ width: "20px", height: "20px" }} />
+                <PersonOutlineOutlinedIcon
+                  sx={{ width: "20px", height: "20px" }}
+                />
               </InputAdornment>
             ),
           }}
@@ -289,7 +295,9 @@ export const RegisterForm = () => {
             },
             startAdornment: (
               <InputAdornment position="start">
-                <Email sx={{ width: "20px", height: "20px" }} />
+                <MailOutlineOutlinedIcon
+                  sx={{ width: "20px", height: "20px" }}
+                />
               </InputAdornment>
             ),
           }}
@@ -323,7 +331,7 @@ export const RegisterForm = () => {
             },
             startAdornment: (
               <InputAdornment position="start">
-                <Lock sx={{ width: "20px", height: "20px" }} />
+                <LockOutlinedIcon sx={{ width: "20px", height: "20px" }} />
               </InputAdornment>
             ),
           }}

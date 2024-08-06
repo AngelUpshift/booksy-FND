@@ -1,4 +1,4 @@
-import { Email } from "@mui/icons-material";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import {
   Box,
   Button,
@@ -96,7 +96,9 @@ export const ForgotPasswordForm = () => {
             },
             startAdornment: (
               <InputAdornment position="start">
-                <Email sx={{ width: "20px", height: "20px" }} />
+                <MailOutlineOutlinedIcon
+                  sx={{ width: "20px", height: "20px" }}
+                />
               </InputAdornment>
             ),
           }}

@@ -54,7 +54,7 @@ const App = () => {
         <Route path="/clock-in" element={<ClockInPage />} />
         <Route path="/clock-out" element={<ClockOutPage />} />
         <Route path="/me" element={<MyProfilePage />} />
-        <Route path="/editProfile" element={<EditProfilePage />} />
+        <Route path="/editProfile/:id" element={<EditProfilePage />} />
         <Route path="*" element={<Navigate to="room" />} />
       </Routes>
     </ThemeProvider>

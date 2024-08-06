@@ -55,12 +55,12 @@ export const getUserThunk = createAsyncThunk(
 
 export const putUserThunk = createAsyncThunk(
   "user/update",
-  async (userData: IUserPutUser, { rejectWithValue }) => {
+  async (
+    { id, ...userData }: { id: string | undefined } & IUserPutUser,
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await axiosInstance.put(
-        `/user/${userData._id}`,
-        userData
-      );
+      const response = await axiosInstance.put(`/user/${id}`, userData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
