@@ -45,6 +45,7 @@ export const loginThunk = createAsyncThunk(
       const { accessToken } = response.data;
 
       localStorage.setItem("token", accessToken);
+      window.location.href = "/room";
       //ToDo: after this we need to redirect to auth page
       //set the token here so that it's not set on every page
       return response.data;
