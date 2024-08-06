@@ -39,13 +39,20 @@ export const loginThunk = createAsyncThunk(
   "auth/login",
   async (userData: IUserLogin, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/auth/login", userData);
+      const response = await axiosInstance.post("/auth/login", userData, {
+        withCredentials: true,
+      });
+      const { accessToken } = response.data;
+
+      localStorage.setItem("token", accessToken);
+      //ToDo: after this we need to redirect to auth page
+      //set the token here so that it's not set on every page
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
       } else {
-        return rejectWithValue("An unexpedted error occurred");
+        return rejectWithValue("An unexpected error occurred");
       }
     }
   }
@@ -56,12 +63,15 @@ export const logoutThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post("/auth/logout");
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
       } else {
-        return rejectWithValue("An unexpedted error occurred");
+        return rejectWithValue("An unexpected error occurred");
       }
     }
   }
@@ -77,7 +87,7 @@ export const meThunk = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
       } else {
-        return rejectWithValue("An unexpedted error occurred");
+        return rejectWithValue("An unexpected error occurred");
       }
     }
   }
@@ -96,7 +106,7 @@ export const changePasswordThunk = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
       } else {
-        return rejectWithValue("An unexpedted error occurred");
+        return rejectWithValue("An unexpected error occurred");
       }
     }
   }
@@ -115,7 +125,7 @@ export const forgotPasswordThunk = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
       } else {
-        return rejectWithValue("An unexpedted error occurred");
+        return rejectWithValue("An unexpected error occurred");
       }
     }
   }
@@ -140,7 +150,7 @@ export const resetPasswordThunk = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
       } else {
-        return rejectWithValue("An unexpedted error occurred");
+        return rejectWithValue("An unexpected error occurred");
       }
     }
   }

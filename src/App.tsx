@@ -42,19 +42,67 @@ const App = () => {
         <Route
           path="room"
           element={
-            // <ProtectedRoute>
-            //   <RoomsPage />
-            // </ProtectedRoute>
-            <RoomsPage />
+            <ProtectedRoute>
+              <RoomsPage />
+            </ProtectedRoute>
           }
         />
-        <Route path="room/main-reserve-desk" element={<MainRoomPage />} />
-        <Route path="room/small-reserve-desk" element={<SmallRoomPage />} />
-        <Route path="room/cool-reserve-desk" element={<CoolRoomPage />} />
-        <Route path="/clock-in" element={<ClockInPage />} />
-        <Route path="/clock-out" element={<ClockOutPage />} />
-        <Route path="/me" element={<MyProfilePage />} />
-        <Route path="/editProfile/:id" element={<EditProfilePage />} />
+        <Route
+          path="room/main-reserve-desk"
+          element={
+            <ProtectedRoute>
+              <MainRoomPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="room/small-reserve-desk"
+          element={
+            <ProtectedRoute>
+              <SmallRoomPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="room/cool-reserve-desk"
+          element={
+            <ProtectedRoute>
+              <CoolRoomPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/clock-in"
+          element={
+            <ProtectedRoute>
+              <ClockInPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/clock-out"
+          element={
+            <ProtectedRoute>
+              <ClockOutPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/me"
+          element={
+            <ProtectedRoute>
+              <MyProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/editProfile"
+          element={
+            <ProtectedRoute>
+              <EditProfilePage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="room" />} />
       </Routes>
     </ThemeProvider>
