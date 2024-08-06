@@ -1,11 +1,41 @@
-import { Box, Container, Typography, Grid } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  Button,
+  DialogActions,
+} from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Link } from "react-router-dom";
 import logo from "../../img/Picture.jpg";
 import { NavigationBar } from "../components/NavigationBar/NavigationBar";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import { useAppDispatch } from "../redux/store";
+import { logoutThunk } from "../redux/slices/authSlice";
 
 export const MyProfilePage = () => {
+  const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClickClose = () => {
+    setOpen(false);
+  };
+
+  const logoutLogic = () => {
+    dispatch(logoutThunk());
+  };
+
   return (
     <Container
       component="form"
@@ -20,15 +50,85 @@ export const MyProfilePage = () => {
       }}
     >
       {/* Logout Icon */}
-      <Link to="/login" style={{ position: "absolute", top: 70, right: 16 }}>
-        <LogoutIcon
+      <LogoutIcon
+        sx={{
+          width: 32,
+          height: 32,
+          color: "#B71C1C",
+          position: "absolute",
+          display: "flex",
+          flexDirection: "column",
+          top: 70,
+          right: 16,
+        }}
+        onClick={handleClickOpen}
+      />
+      <Dialog
+        open={open}
+        onClose={handleClickClose}
+        aria-labelledby="logout-dialog-title"
+        aria-describedby="logout-dialog-description"
+        fullWidth
+        PaperProps={{
+          sx: {
+            borderRadius: "20px",
+          },
+        }}
+      >
+        <CloseIcon
           sx={{
-            width: 32,
-            height: 32,
-            color: "#B71C1C",
+            width: 20,
+            height: 20,
+            display: "flex",
+            position: "absolute",
+            flexDirection: "column",
+            top: 10,
+            right: 10,
           }}
+          onClick={handleClickClose}
         />
-      </Link>
+        <DialogTitle id="logout-dialog-title">
+          <Typography fontSize="18px" fontStyle="Roboto" fontWeight="700">
+            Log out
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="logout-dialog-description">
+            <Typography fontWeight="400" fontSize="14px" fontStyle="Roboto">
+              Are you sure you want to logout ?
+            </Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            size="medium"
+            sx={{
+              borderRadius: "100px",
+              backgroundColor: "#DBDBDD",
+              textTransform: "none",
+              color: "gray",
+            }}
+            onClick={handleClickClose}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            size="medium"
+            sx={{
+              height: 38,
+              padding: "9px 16px 9px 16px",
+              borderRadius: "100px",
+              textTransform: "none",
+            }}
+            onClick={logoutLogic}
+            autoFocus
+          >
+            Okay
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       {/* Profile Section */}
       <Box
         sx={{
