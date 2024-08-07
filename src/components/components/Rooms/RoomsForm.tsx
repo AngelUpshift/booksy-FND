@@ -78,118 +78,134 @@ export const RoomsForm = () => {
           alignItems: "center",
         }}
       >
-        <Link to="/room/main-reserve-desk" style={{ textDecoration: "none" }}>
-          <Card
-            sx={{
-              width: "361px",
-              height: "86px",
-              borderRadius: "20px", // Added borderRadius here
-            }}
-          >
-            <CardContent>
-              <Typography
+        {room.roomList.length > 0 && (
+          <>
+            <Link
+              to="/room/main-reserve-desk"
+              style={{ textDecoration: "none" }}
+            >
+              <Card
                 sx={{
-                  width: "100%",
-                  height: "25px",
-                  left: "12px",
-                  paddingTop: "3px",
+                  width: "361px",
+                  height: "86px",
+                  borderRadius: "20px", // Added borderRadius here
                 }}
-                fontStyle="Roboto"
-                fontWeight="700"
-                fontSize="18px"
-                component="div"
-                color="#000000"
               >
-                {room.roomList[0].name}
-              </Typography>
-              <Typography
+                <CardContent>
+                  <Typography
+                    sx={{
+                      width: "100%",
+                      height: "25px",
+                      left: "12px",
+                      paddingTop: "3px",
+                    }}
+                    fontStyle="Roboto"
+                    fontWeight="700"
+                    fontSize="18px"
+                    component="div"
+                    color="#000000"
+                  >
+                    {room.roomList[0]?.name}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      width: "249px",
+                      height: "25px",
+                      left: "12px",
+                      paddingTop: "16px",
+                    }}
+                    component="div"
+                  >
+                    {room.roomList[0]?.desks.length} seats total / 6 seats
+                    available
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link
+              to="/room/small-reserve-desk"
+              style={{ textDecoration: "none" }}
+            >
+              <Card
                 sx={{
-                  width: "249px",
-                  height: "25px",
-                  left: "12px",
-                  paddingTop: "16px",
+                  width: "361px",
+                  height: "86px",
+                  borderRadius: "20px", // Added borderRadius here
                 }}
-                component="div"
               >
-                {room.roomList[0].desks.length} seats total / 6 seats available
-              </Typography>
-            </CardContent>
-          </Card>
-        </Link>
-        <Link to="/room/small-reserve-desk" style={{ textDecoration: "none" }}>
-          <Card
-            sx={{
-              width: "361px",
-              height: "86px",
-              borderRadius: "20px", // Added borderRadius here
-            }}
-          >
-            <CardContent>
-              <Typography
+                <CardContent>
+                  <Typography
+                    sx={{
+                      width: "100%",
+                      height: "25px",
+                      left: "12px",
+                      paddingTop: "3px",
+                    }}
+                    fontStyle="Roboto"
+                    fontWeight="700"
+                    fontSize="18px"
+                    component="div"
+                  >
+                    {room.roomList[1]?.name}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      width: "249px",
+                      height: "25px",
+                      left: "12px",
+                      paddingTop: "16px",
+                    }}
+                    component="div"
+                  >
+                    {room.roomList[1]?.desks.length} seats total / 6 seats
+                    available
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link
+              to="/room/cool-reserve-desk"
+              style={{ textDecoration: "none" }}
+            >
+              <Card
                 sx={{
-                  width: "100%",
-                  height: "25px",
-                  left: "12px",
-                  paddingTop: "3px",
+                  width: "361px",
+                  height: "86px",
+                  borderRadius: "20px", // Added borderRadius here
                 }}
-                fontStyle="Roboto"
-                fontWeight="700"
-                fontSize="18px"
-                component="div"
               >
-                {room.roomList[1].name}
-              </Typography>
-              <Typography
-                sx={{
-                  width: "249px",
-                  height: "25px",
-                  left: "12px",
-                  paddingTop: "16px",
-                }}
-                component="div"
-              >
-                {room.roomList[1].desks.length} seats total / 6 seats available
-              </Typography>
-            </CardContent>
-          </Card>
-        </Link>
-        <Link to="/room/cool-reserve-desk" style={{ textDecoration: "none" }}>
-          <Card
-            sx={{
-              width: "361px",
-              height: "86px",
-              borderRadius: "20px", // Added borderRadius here
-            }}
-          >
-            <CardContent>
-              <Typography
-                sx={{
-                  width: "100%",
-                  height: "25px",
-                  left: "12px",
-                  paddingTop: "3px",
-                }}
-                fontStyle="Roboto"
-                fontWeight="700"
-                fontSize="18px"
-                component="div"
-              >
-                {room.roomList[2].name}
-              </Typography>
-              <Typography
-                sx={{
-                  width: "249px",
-                  height: "25px",
-                  left: "12px",
-                  paddingTop: "16px",
-                }}
-                component="div"
-              >
-                {room.roomList[2].desks.length} seats total / 6 seats available
-              </Typography>
-            </CardContent>
-          </Card>
-        </Link>
+                <CardContent>
+                  <Typography
+                    sx={{
+                      width: "100%",
+                      height: "25px",
+                      left: "12px",
+                      paddingTop: "3px",
+                    }}
+                    fontStyle="Roboto"
+                    fontWeight="700"
+                    fontSize="18px"
+                    component="div"
+                  >
+                    {room.roomList[2]?.name}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      width: "249px",
+                      height: "25px",
+                      left: "12px",
+                      paddingTop: "16px",
+                    }}
+                    component="div"
+                  >
+                    {room.roomList[2]?.desks.length} seats total / 6 seats
+                    available
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Link>
+          </>
+        )}
       </Box>
     </Box>
   );
