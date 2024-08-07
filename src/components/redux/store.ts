@@ -6,6 +6,7 @@ import deskReducer from "./slices/deskSlice";
 import roomReducer from "./slices/roomSlice";
 import userReducer from "./slices/userSlice";
 import { useDispatch as useReduxDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useReduxDispatch;
+export const useAppSelector = useSelector.withTypes<RootState>();
 
 export default store;

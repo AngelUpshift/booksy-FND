@@ -71,7 +71,7 @@ export const postBookingThunk = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         return rejectWithValue(error.response.data);
       } else {
-        return rejectWithValue("An unexpedted error occurred");
+        return rejectWithValue("An unexpected error occurred");
       }
     }
   }
