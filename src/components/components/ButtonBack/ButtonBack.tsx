@@ -20,8 +20,8 @@ export const ButtonBack = () => {
           borderRadius: "100px",
           backgroundColor: "#DBDBDD",
           color: "#686868",
-          width: "100%",
-          height: "100%",
+          width: "89px",
+          height: "38px",
         }}
         href="/room"
       >

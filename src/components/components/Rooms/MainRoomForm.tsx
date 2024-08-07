@@ -1,46 +1,99 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
+import { Seat1 } from "../Seats/Seat1";
+import { Seat2 } from "../Seats/Seat2";
+import { Seat3 } from "../Seats/Seat3";
+import { Seat4 } from "../Seats/Seat4";
 
 export const MainRoomForm = () => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
-        width: "220px",
+        width: "361px",
         display: "flex",
         flexDirection: "column",
-        alignItems: "left",
-        height: "34px",
         position: "absolute",
-        top: 112,
-        backgroundColor: "white",
-        left: 16,
+        alignItems: "center",
+        top: 193,
+        overflowY: "auto", // Allow vertical scrolling
       }}
     >
-      <Typography
-        sx={{
-          width: "100%",
-        }}
-        fontStyle="Roboto"
-        fontSize="24px"
-        fontWeight="700"
-        lineHeight="33.6px"
-      >
-        Main Dev Room 🏣
-      </Typography>
       <Box
         sx={{
-          top: 148,
-          width: "250px",
-          height: "25px",
           display: "flex",
           flexDirection: "column",
+          gap: "10px",
+          width: "100%",
         }}
-        color="#686868"
-        fontStyle="Roboto"
-        fontSize="18px"
-        fontWeight="400"
-        lineHeight="25.2px"
       >
-        8 seats / 6 seats available
+        <Typography
+          sx={{
+            width: "100%",
+          }}
+          fontStyle="Roboto"
+          fontSize="16px"
+          fontWeight="700"
+          lineHeight="22.4px"
+        >
+          Left side seats
+        </Typography>
+        <Seat1 />
+        <Seat2 />
+      </Box>
+      <Box
+        sx={{ width: "100%", maxWidth: 361, border: 1, color: "#C5C5C7 " }}
+      ></Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          width: 361,
+
+          top: 204,
+        }}
+      >
+        <Typography
+          sx={{
+            width: "100%",
+          }}
+          fontStyle="Roboto"
+          fontSize="16px"
+          fontWeight="700"
+          lineHeight="22.4px"
+        >
+          Middle seats
+        </Typography>
+        <Seat1 />
+        <Seat2 />
+        <Seat3 />
+        <Seat4 />
+      </Box>
+      <Box
+        sx={{ width: "100%", maxWidth: 361, border: 1, color: "#C5C5C7 " }}
+      ></Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          maxWidth: 361,
+          width: "100%",
+        }}
+      >
+        <Typography
+          sx={{
+            width: "100%",
+          }}
+          fontStyle="Roboto"
+          fontSize="16px"
+          fontWeight="700"
+          lineHeight="22.4px"
+        >
+          Window seats
+        </Typography>
+        <Seat1 />
+        <Seat2 />
       </Box>
     </Box>
   );
