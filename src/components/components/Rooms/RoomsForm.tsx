@@ -1,9 +1,26 @@
 import { Box, Card, CardContent, Typography, useTheme } from "@mui/material";
 import logo from "../../../img/login/room/Weather Widget.jpg";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { useEffect } from "react";
+import { getRoomThunk } from "../../redux/slices/roomSlice";
 
 export const RoomsForm = () => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+
+  const room = useAppSelector((state) => state.room);
+
+  useEffect(() => {
+    const defaultQueryParams = {
+      search: "",
+      sortBy: "createdAt",
+      page: 1,
+      order: "asc",
+    };
+
+    dispatch(getRoomThunk(room.queryParameters || defaultQueryParams));
+  }, [dispatch, room.queryParameters]);
 
   return (
     <Box
@@ -83,7 +100,7 @@ export const RoomsForm = () => {
                 component="div"
                 color="#000000"
               >
-                Main Dev Room
+                {room.roomList[0].name}
               </Typography>
               <Typography
                 sx={{
@@ -94,7 +111,7 @@ export const RoomsForm = () => {
                 }}
                 component="div"
               >
-                8 seats total / 6 seats available
+                {room.roomList[0].desks.length} seats total / 6 seats available
               </Typography>
             </CardContent>
           </Card>
@@ -120,7 +137,7 @@ export const RoomsForm = () => {
                 fontSize="18px"
                 component="div"
               >
-                Small Boss Room
+                {room.roomList[1].name}
               </Typography>
               <Typography
                 sx={{
@@ -131,7 +148,7 @@ export const RoomsForm = () => {
                 }}
                 component="div"
               >
-                8 seats total / 6 seats available
+                {room.roomList[1].desks.length} seats total / 6 seats available
               </Typography>
             </CardContent>
           </Card>
@@ -157,7 +174,7 @@ export const RoomsForm = () => {
                 fontSize="18px"
                 component="div"
               >
-                The Cool Last Room
+                {room.roomList[2].name}
               </Typography>
               <Typography
                 sx={{
@@ -168,7 +185,7 @@ export const RoomsForm = () => {
                 }}
                 component="div"
               >
-                8 seats total / 6 seats available
+                {room.roomList[2].desks.length} seats total / 6 seats available
               </Typography>
             </CardContent>
           </Card>

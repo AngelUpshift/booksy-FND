@@ -96,7 +96,7 @@ const App = () => {
           }
         />
         <Route
-          path="/editProfile"
+          path="/editProfile/:id"
           element={
             <ProtectedRoute>
               <EditProfilePage />

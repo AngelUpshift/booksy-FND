@@ -12,17 +12,22 @@ import {
 } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Link } from "react-router-dom";
-import logo from "../../img/Picture.jpg";
 import { NavigationBar } from "../components/NavigationBar/NavigationBar";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { useAppDispatch } from "../redux/store";
-import { logoutThunk } from "../redux/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { logoutThunk, meThunk } from "../redux/slices/authSlice";
+import logo from "../../img/defaultProfileImage.jpg";
 
 export const MyProfilePage = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(meThunk());
+  }, [dispatch]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -153,9 +158,9 @@ export const MyProfilePage = () => {
             fontStyle="Roboto"
             fontSize="24px"
           >
-            Emily’s Profile
+            {user.first_name}’s Profile
           </Typography>
-          <Link to="/editProfile/:id">
+          <Link to={`/editProfile/${user._id}`}>
             <SettingsOutlinedIcon
               sx={{
                 ml: 1,
@@ -179,8 +184,7 @@ export const MyProfilePage = () => {
         >
           <Box
             component="img"
-            src={logo}
-            alt="Emily Benefield"
+            src={user.avatar_url !== "" ? user.avatar_url : logo}
             sx={{
               width: 154,
               height: 229,
@@ -190,13 +194,16 @@ export const MyProfilePage = () => {
           />
           <Box sx={{ width: 181, height: 232 }}>
             <Typography variant="h6" fontWeight="700" fontSize="32px">
-              Emily Benefield
+              {user.first_name}
+            </Typography>
+            <Typography variant="h6" fontWeight="700" fontSize="32px">
+              {user.last_name}
             </Typography>
             <Typography variant="body2" color="#686868" fontSize="10px">
               Email
             </Typography>
             <Typography variant="body2" color="black" fontSize="14px">
-              emilybenefield@hotmail.com
+              {user.email}
             </Typography>
             <Typography variant="body2" color="#686868" fontSize="10px">
               Date of Birth:
@@ -208,7 +215,7 @@ export const MyProfilePage = () => {
               Team
             </Typography>
             <Typography variant="body2" color="black" fontSize="14px">
-              Product team
+              {user.team}
             </Typography>
           </Box>
         </Box>

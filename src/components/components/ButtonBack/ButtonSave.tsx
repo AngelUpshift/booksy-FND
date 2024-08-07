@@ -82,8 +82,8 @@ export const ButtonSave = ({ onClick }: ButtonSaveProps) => {
       <Dialog
         open={open}
         onClose={handleClickClose}
-        aria-labelledby="logout-dialog-title"
-        aria-describedby="logout-dialog-description"
+        aria-labelledby="save-dialog-title"
+        aria-describedby="save-dialog-description"
         fullWidth
         PaperProps={{
           sx: {
@@ -103,15 +103,15 @@ export const ButtonSave = ({ onClick }: ButtonSaveProps) => {
           }}
           onClick={handleClickClose}
         />
-        <DialogTitle id="logout-dialog-title">
+        <DialogTitle id="save-dialog-title">
           <Typography fontSize="18px" fontStyle="Roboto" fontWeight="700">
-            Log out
+            Edit Profile
           </Typography>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="logout-dialog-description">
+          <DialogContentText id="save-dialog-description">
             <Typography fontWeight="400" fontSize="14px" fontStyle="Roboto">
-              Are you sure you want to logout ?
+              Are you sure you want to save the made changes?{" "}
             </Typography>
           </DialogContentText>
         </DialogContent>
@@ -141,7 +141,7 @@ export const ButtonSave = ({ onClick }: ButtonSaveProps) => {
             onClick={onClick}
             autoFocus
           >
-            Okay
+            Save
           </Button>
         </DialogActions>
       </Dialog>
