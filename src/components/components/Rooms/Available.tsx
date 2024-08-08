@@ -15,8 +15,8 @@ export const Available = () => {
     >
       <Typography
         sx={{
-          width: 52,
-          display: "flex",
+          width: "100%",
+          paddingTop: "2px",
         }}
         fontStyle="Roboto"
         fontSize="10px"
