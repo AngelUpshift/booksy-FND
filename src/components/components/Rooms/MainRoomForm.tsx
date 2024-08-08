@@ -6,6 +6,7 @@ import { Seat4 } from "../Seats/Seat4";
 
 export const MainRoomForm = () => {
   const theme = useTheme();
+
   return (
     <Box
       sx={{
@@ -49,7 +50,6 @@ export const MainRoomForm = () => {
           flexDirection: "column",
           gap: "10px",
           width: 361,
-
           top: 204,
         }}
       >
