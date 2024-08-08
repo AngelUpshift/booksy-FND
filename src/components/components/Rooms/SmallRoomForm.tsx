@@ -75,8 +75,8 @@ export const SmallRoomForm = () => {
               gap: "10px",
             }}
           >
-            <Seat1 />
-            <Seat2 />
+            <Seat1 seat={room.roomList[1]?.desks[0]} />
+            <Seat2 seat={room.roomList[1]?.desks[1]} />
           </Box>
         </>
       )}

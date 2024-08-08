@@ -147,9 +147,6 @@ export const ButtonBookSeat = () => {
                   onClick={handleCalendarOpen}
                 />
               </RadioGroup>
-              {/* {selectedValue === "Custom day" && (
-                <Button onClick={handleCalendarOpen}>Pick a date</Button>
-              )} */}
             </FormControl>
           </DialogContent>
           <DialogActions>

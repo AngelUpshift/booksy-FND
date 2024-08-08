@@ -37,9 +37,9 @@ export const initialState: deskState = {
 
 export const getDeskByIdThunk = createAsyncThunk(
   "desk/getById",
-  async (deskData: IDeskGetDeskByIdParams, { rejectWithValue }) => {
+  async (id: string | undefined, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get(`/desk/${deskData._id}`);
+      const response = await axiosInstance.get(`/desk/${id}`);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
