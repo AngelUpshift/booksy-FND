@@ -5,6 +5,7 @@ import { SmallRoomForm } from "../../components/Rooms/SmallRoomForm";
 
 export const SmallRoomPage = () => {
   const theme = useTheme();
+
   return (
     <Container
       maxWidth="xs"
