@@ -1,8 +1,31 @@
 import { Box, Typography } from "@mui/material";
 import { ButtonBookSeat } from "../ButtonBack/ButtonBookSeat";
 import { Available } from "../Rooms/Available";
+import { IDesk } from "../../../types/desk/desk";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { useEffect } from "react";
+import { getDeskThunk } from "../../redux/slices/deskSlice";
 
-export const Seat1 = () => {
+interface SeatProps {
+  seat: string | IDesk;
+}
+
+export const Seat1 = ({ seat }: SeatProps) => {
+  const dispatch = useAppDispatch();
+  const desk = useAppSelector((state) => state.desk);
+
+  useEffect(() => {
+    const defaultQueryParams = {
+      search: "",
+      sortBy: "createdAt",
+      page: 1,
+      order: "asc",
+    };
+
+    dispatch(getDeskThunk(desk.queryParameters || defaultQueryParams));
+  }, [dispatch, desk.queryParameters]);
+  console.log("desk", desk);
+
   return (
     <Box
       sx={{
@@ -21,7 +44,14 @@ export const Seat1 = () => {
           borderRadius: "4px 0px 0px 0px",
         }}
       >
-        <Typography>💺 Seat 1</Typography>
+        <Typography>
+          💺{" "}
+          {desk.deskList.map((value) =>
+            value._id === seat
+              ? value.name.split(" ").pop() + " " + value.shortName
+              : ""
+          )}
+        </Typography>
         <Available />
       </Box>
       <Box

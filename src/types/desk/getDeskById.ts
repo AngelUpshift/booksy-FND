@@ -1,3 +1,3 @@
 export interface IDeskGetDeskByIdParams {
-  _id: string;
+  _id: string | undefined;
 }

@@ -9,7 +9,8 @@ import { getDeskThunk } from "../../redux/slices/deskSlice";
 interface SeatProps {
   seat: string | IDesk;
 }
-export const Seat5 = ({ seat }: SeatProps) => {
+
+export const Seat7 = ({ seat }: SeatProps) => {
   const dispatch = useAppDispatch();
   const desk = useAppSelector((state) => state.desk);
 
@@ -24,6 +25,7 @@ export const Seat5 = ({ seat }: SeatProps) => {
     dispatch(getDeskThunk(desk.queryParameters || defaultQueryParams));
   }, [dispatch, desk.queryParameters]);
   console.log("desk", desk);
+
   return (
     <Box
       sx={{
@@ -43,7 +45,7 @@ export const Seat5 = ({ seat }: SeatProps) => {
         }}
       >
         <Typography>
-          💺
+          💺{" "}
           {desk.deskList.map((value) =>
             value._id === seat
               ? value.name.split(" ").pop() + " " + value.shortName
