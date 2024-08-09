@@ -30,8 +30,6 @@ export const MainRoomForm = () => {
     room.roomList.length > 0 ? room.roomList[0].desks[1] : "nop"
   );
 
-  console.log("HEREHEHERHE", room.roomList[0].desks[3]);
-
   return (
     <Box
       sx={{
@@ -63,7 +61,7 @@ export const MainRoomForm = () => {
         >
           Left side seats
         </Typography>
-        <Seat1 seat={room.roomList[0].desks[0]} />
+        <Seat1 seat={room.roomList[0].desks[0]} roomId={room.roomList[0]._id} />
         <Seat2 seat={room.roomList[0].desks[1]} />
       </Box>
       <Box

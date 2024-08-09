@@ -16,6 +16,7 @@ import { IBookingCancelBookingParams } from "../../../types/booking/cancelBookin
 import axios from "axios";
 import { IBookingGetBookingByIdParams } from "../../../types/booking/getBookingById";
 import axiosInstance from "../../../utils/axiosInstance";
+import { string } from "yup";
 
 export interface bookingState {
   currentBooking: IBooking;
@@ -28,7 +29,7 @@ export const initialState: bookingState = {
   currentBooking: {
     _id: "",
     status: "" as bookingStatus,
-    date: new Date(),
+    date: "",
     user: {
       _id: "",
       first_name: "",
@@ -47,7 +48,7 @@ export const initialState: bookingState = {
       status: "" as deskStatus,
       direction: "" as deskDirection,
     },
-    duration: 1 as durationType,
+    duration: 1,
     notes: "",
     cancellationReason: "",
     referenceNumber: "",

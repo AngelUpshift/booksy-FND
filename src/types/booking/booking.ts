@@ -7,15 +7,15 @@ export enum bookingStatus {
   CANCELLED = "cancelled",
 }
 
-export type durationType = 1 | 3 | 5 | 10;
+export const durationType = [1, 3, 5, 10];
 
 export interface IBooking {
   _id: string;
   status: bookingStatus;
-  date: Date;
+  date: string;
   user: IUser;
   desk: IDesk;
-  duration: durationType;
+  duration: number;
   notes: string;
   cancellationReason: string;
   referenceNumber: string;

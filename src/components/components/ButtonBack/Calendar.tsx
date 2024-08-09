@@ -16,14 +16,42 @@ import { useState } from "react";
 interface CalendarProps {
   open: boolean;
   onClose: () => void;
+  setCustomDate: (date: Dayjs | null) => void;
+  setDuration: (duration: number) => void;
+  bookingLogic: () => void;
 }
 
-export const Calendar = ({ open, onClose }: CalendarProps) => {
-  const [customDate, setCustomDate] = useState<Dayjs | null>(dayjs());
+export const Calendar = ({
+  open,
+  onClose,
+  setCustomDate,
+  setDuration,
+  bookingLogic,
+}: CalendarProps) => {
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const handleDateChange = (newValue: Dayjs | null) => {
-    setCustomDate(newValue);
+    setSelectedDate(newValue);
   };
+
+  const handleOkayClick = () => {
+    if (selectedDate) {
+      setConfirmOpen(true); // Show confirmation dialog
+      setCustomDate(selectedDate);
+      setDuration(1);
+    }
+  };
+  const handleConfirmClose = () => {
+    setConfirmOpen(false); // Close confirmation dialog
+  };
+
+  const handleConfirmYes = () => {
+    bookingLogic(); // Proceed with booking
+    setConfirmOpen(false); // Close confirmation dialog
+    onClose(); // Close calendar dialog
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box>
@@ -80,8 +108,62 @@ export const Calendar = ({ open, onClose }: CalendarProps) => {
                 textTransform: "none",
               }}
               autoFocus
+              onClick={handleOkayClick}
             >
               Okay
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={confirmOpen}
+          onClose={handleConfirmClose}
+          aria-labelledby="confirm-dialog-title"
+          aria-describedby="confirm-dialog-description"
+        >
+          <DialogTitle id="confirm-dialog-title">
+            <Typography fontSize="18px" fontStyle="Roboto" fontWeight="700">
+              Are you sure?
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="confirm-dialog-description">
+              <Typography
+                fontWeight="400"
+                fontSize="14px"
+                fontStyle="Roboto"
+                lineHeight="19.6px"
+              >
+                Do you want to proceed with the booking?
+              </Typography>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              size="medium"
+              sx={{
+                borderRadius: "100px",
+                backgroundColor: "#DBDBDD",
+                textTransform: "none",
+                color: "gray",
+              }}
+              onClick={handleConfirmClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              size="medium"
+              sx={{
+                height: 38,
+                padding: "9px 16px 9px 16px",
+                borderRadius: "100px",
+                textTransform: "none",
+              }}
+              autoFocus
+              onClick={handleConfirmYes}
+            >
+              Yes
             </Button>
           </DialogActions>
         </Dialog>

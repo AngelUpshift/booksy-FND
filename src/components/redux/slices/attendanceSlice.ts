@@ -22,7 +22,7 @@ export const initialState: IAttendance = {
   bookingId: {
     _id: "",
     status: "" as bookingStatus,
-    date: new Date(),
+    date: "",
     user: {
       _id: "",
       first_name: "",
@@ -41,7 +41,7 @@ export const initialState: IAttendance = {
       status: "" as deskStatus,
       direction: "" as deskDirection,
     },
-    duration: 1 as durationType,
+    duration: 1,
     notes: "",
     cancellationReason: "",
     referenceNumber: "",
