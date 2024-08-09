@@ -4,13 +4,14 @@ import { Available } from "../Rooms/Available";
 import { IDesk } from "../../../types/desk/desk";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { useEffect } from "react";
-import { getDeskThunk } from "../../redux/slices/deskSlice";
+import deskSlice, { getDeskThunk } from "../../redux/slices/deskSlice";
 
 interface SeatProps {
   seat: string | IDesk;
+  roomId: string;
 }
 
-export const Seat1 = ({ seat }: SeatProps) => {
+export const Seat1 = ({ seat, roomId }: SeatProps) => {
   const dispatch = useAppDispatch();
   const desk = useAppSelector((state) => state.desk);
 
@@ -26,6 +27,8 @@ export const Seat1 = ({ seat }: SeatProps) => {
   }, [dispatch, desk.queryParameters]);
   console.log("desk", desk);
 
+  const currentDesk = desk.deskList.find((value) => value._id === seat);
+  const convertedDesk = String(currentDesk?._id);
   return (
     <Box
       sx={{
@@ -63,7 +66,7 @@ export const Seat1 = ({ seat }: SeatProps) => {
           flexDirection: "column",
         }}
       >
-        <ButtonBookSeat />
+        <ButtonBookSeat deskId={convertedDesk} roomId={roomId} />
       </Box>
     </Box>
   );

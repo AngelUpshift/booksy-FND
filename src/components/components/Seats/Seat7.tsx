@@ -63,7 +63,7 @@ export const Seat7 = ({ seat }: SeatProps) => {
           flexDirection: "column",
         }}
       >
-        <ButtonBookSeat />
+        {/* <ButtonBookSeat /> */}
       </Box>
     </Box>
   );

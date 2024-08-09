@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  duration,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -20,8 +21,15 @@ import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Calendar } from "./Calendar";
+import { postBookingThunk } from "../../redux/slices/bookingSlice";
+import { IDesk } from "../../../types/desk/desk";
 
-export const ButtonBookSeat = () => {
+interface SeatProps {
+  deskId: string;
+  roomId: string;
+}
+
+export const ButtonBookSeat = ({ deskId, roomId }: SeatProps) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
@@ -30,15 +38,28 @@ export const ButtonBookSeat = () => {
     setOpen(true);
   };
 
-  // const BookingLogic=()=>{
-  // dispatch(postBookingThunk())
-  //}
   const [selectedValue, setSelectedValue] = useState<string>("");
   const [customDate, setCustomDate] = useState<Dayjs | null>(dayjs());
+  const [duration, setDuration] = useState<number>(1);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value);
+    const value = event.target.value;
+    setSelectedValue(value);
+    if (value === "Next day") {
+      setDuration(1);
+      setCustomDate(dayjs().add(1, "day"));
+    } else if (value === "Three days in a row") {
+      setDuration(3);
+      setCustomDate(dayjs());
+    } else if (value === "Five days in a row") {
+      setDuration(5);
+      setCustomDate(dayjs());
+    } else if (value === "Ten days in a row") {
+      setDuration(10);
+      setCustomDate(dayjs());
+    }
   };
+
   const handleCalendarOpen = () => {
     setCalendarOpen(true);
   };
@@ -52,6 +73,19 @@ export const ButtonBookSeat = () => {
   const handleClickClose = () => {
     setOpen(false);
   };
+
+  const booking = {
+    room_id: roomId,
+    desk_id: deskId,
+    date: customDate ? customDate.toISOString() : new Date().toISOString(),
+    duration: duration,
+  };
+
+  const BookingLogic = () => {
+    console.log("booking", booking);
+    dispatch(postBookingThunk(booking));
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box
@@ -173,12 +207,19 @@ export const ButtonBookSeat = () => {
                 textTransform: "none",
               }}
               autoFocus
+              onClick={BookingLogic}
             >
               Okay
             </Button>
           </DialogActions>
         </Dialog>
-        <Calendar open={calendarOpen} onClose={handleCalendarClose} />
+        <Calendar
+          open={calendarOpen}
+          onClose={handleCalendarClose}
+          setCustomDate={setCustomDate}
+          setDuration={setDuration}
+          bookingLogic={BookingLogic}
+        />
       </Box>
     </LocalizationProvider>
   );

@@ -80,7 +80,10 @@ export const CoolRoomForm = () => {
               gap: "10px",
             }}
           >
-            <Seat1 seat={room.roomList[2].desks[0]} />
+            <Seat1
+              seat={room.roomList[2].desks[0]}
+              roomId={room.roomList[2]._id}
+            />
             <Seat2 seat={room.roomList[2].desks[1]} />
             <Seat3 seat={room.roomList[2].desks[2]} />
             <Seat4 seat={room.roomList[2].desks[3]} />
